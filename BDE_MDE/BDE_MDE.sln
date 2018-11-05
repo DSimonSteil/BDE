@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDE_MDE", "BDE_MDE\BDE_MDE.csproj", "{E0B6A5EC-C604-4C19-939C-85C0A64B53CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0B6A5EC-C604-4C19-939C-85C0A64B53CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0B6A5EC-C604-4C19-939C-85C0A64B53CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0B6A5EC-C604-4C19-939C-85C0A64B53CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0B6A5EC-C604-4C19-939C-85C0A64B53CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33FD46AE-6907-43B0-B59F-996D499205FB}
+	EndGlobalSection
+EndGlobal
