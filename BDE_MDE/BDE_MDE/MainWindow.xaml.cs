@@ -29,10 +29,19 @@ namespace BDE_MDE
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Danke",
-                                          "Confirmation",
-                                          MessageBoxButton.YesNo,
-                                          MessageBoxImage.Question);
+                MainFrame.Content = new Login();
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+
+        private void btn_radlader_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MainFrame.Content = new ChangeFacility();
             }
             catch (Exception exc)
             {
@@ -46,6 +55,6 @@ namespace BDE_MDE
             tbx_feedback.Visibility = Visibility.Visible;
             tbx_feedback.Text += exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name 
                 + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine;
-        }
+        }        
     }
 }

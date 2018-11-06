@@ -1,0 +1,20 @@
+﻿<Page x:Class="BDE_MDE.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BDE_MDE"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1024"      
+      Title="Login">
+
+    
+
+    <Grid Background="White">
+        <Label x:Name="lbl_rfID" Content="Bitte halten Sie ihren RFID Chip an den Terminal" HorizontalAlignment="Left" Margin="284,157,0,0" VerticalAlignment="Top" Height="59" Width="436" FontSize="20"/>
+        <Button x:Name="btn_loginManual" Content="Manuell anmelden" HorizontalAlignment="Left" Margin="388,328,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
+        <Button x:Name="btn_loginProblems" Content="Probleme bei Login" HorizontalAlignment="Left" Margin="388,400,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
+        <Button x:Name="btn_backToMain" Content="Zurück" HorizontalAlignment="Left" Margin="388,480,0,0" VerticalAlignment="Top" Width="200" Height="50" />
+
+    </Grid>
+</Page>

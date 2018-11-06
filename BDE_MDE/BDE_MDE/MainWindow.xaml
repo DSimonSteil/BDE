@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="BDE/MDE" ResizeMode="NoResize" Height="786" Width="1024" Icon="logo_small.ico">
     <Grid>
-        <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="btn_login_Click"/>
-        <Button x:Name="btn_radlader" Content="Radladerverwiegung" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_personal" Content="Personalerfassung" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_produktion" Content="Produktionserfassung" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_terminal" Content="Terminal" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
         <TextBox x:Name="tbx_feedback" HorizontalAlignment="Left" Height="23" Margin="10,724,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944"/>
         <Rectangle x:Name="rect_login" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="82" Margin="348,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="311" Stretch="None"/>
-
+        <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="btn_login_Click"/>
+        <Button x:Name="btn_radlader" Content="Radladerverwiegung" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="btn_radlader_Click"/>
+        <Button x:Name="btn_personal" Content="Personalerfassung" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
+        <Button x:Name="btn_produktion" Content="Produktionserfassung" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
+        <Button x:Name="btn_terminal" Content="Terminal" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
+        <Frame x:Name="MainFrame" Margin="215,10,22,38" >
+        </Frame>
     </Grid>
 </Window>
