@@ -5,16 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BDE_MDE"
         mc:Ignorable="d"
-        Title="BDE/MDE" ResizeMode="NoResize" Height="786" Width="1024" Icon="logo_small.ico">
+        Title="BDE/MDE" ResizeMode="NoResize" Height="768" Width="1024" Icon="logo_small.ico">
     <Grid>
-        <TextBox x:Name="tbx_feedback" HorizontalAlignment="Left" Height="23" Margin="10,724,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944"/>
-        <Rectangle x:Name="rect_login" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="82" Margin="348,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="311" Stretch="None"/>
-        <Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="btn_login_Click"/>
-        <Button x:Name="btn_radlader" Content="Radladerverwiegung" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="btn_radlader_Click"/>
-        <Button x:Name="btn_personal" Content="Personalerfassung" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_produktion" Content="Produktionserfassung" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_terminal" Content="Terminal" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Frame x:Name="MainFrame" Margin="215,10,22,38" >
-        </Frame>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+            <TextBox Name="tbx_actualTime" Text="Time" Width="120" FontSize="16" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_actualUser" Text="User" Width="120" FontSize="16" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_sign" Text="Sign" Width="150" FontSize="16" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_facility" Text="Facilty" Width="150" FontSize="16" TextWrapping="Wrap" IsEnabled="False"/>
+
+            
+            <Button x:Name="btn_logout" Content="Logout" HorizontalAlignment="Left" Margin="180,0,0,0" VerticalAlignment="Top" Width="300" Height="80" Click="btn_login_Click"/>
+
+        </StackPanel>
+
+        <TextBox x:Name="tbx_feedback" HorizontalAlignment="Left" Height="23" Margin="10,706,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944"/>
+
+        <Frame x:Name="MainFrame" Margin="0,90,0,0"/>
     </Grid>
 </Window>

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.DirectoryServices.AccountManagement;
+using System.Windows.Threading;
 
 namespace BDE_MDE
 {
@@ -23,6 +25,15 @@ namespace BDE_MDE
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Content = new Login();
+            tbx_actualUser.Text = @"Fahrer: " + System.Environment.NewLine + System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
+            tbx_facility.Text = @"Aktuelle Maschine: " + System.Environment.NewLine + @"Testmaschine";
+            tbx_sign.Text = @"Nummernschild: " + System.Environment.NewLine + @"WIL -DS 83";
+
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                this.tbx_actualTime.Text = DateTime.Now.ToString();
+            }, this.Dispatcher);
         }
 
         private void btn_login_Click(object sender, RoutedEventArgs e)
@@ -41,7 +52,7 @@ namespace BDE_MDE
         {
             try
             {
-                MainFrame.Content = new ChangeFacility();
+                MainFrame.Content = new ChangeFacility();                
             }
             catch (Exception exc)
             {

@@ -9,15 +9,14 @@
       Title="ChangeFacility" Background="White">
 
     <Grid>
-        <Button x:Name="btn_kondirator" Content="Kondirator" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_shredder" Content="Shredder" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_schere" Content="Schere" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_tma" Content="TMA" HorizontalAlignment="Left" Margin="242,10,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_net" Content="NET" HorizontalAlignment="Left" Margin="242,80,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_ssa2" Content="SSA II" HorizontalAlignment="Left" Margin="242,150,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_ssa2innen" Content="SSA II (innen)" HorizontalAlignment="Left" Margin="242,220,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_rsa_xray" Content="RSA / X-Ray" HorizontalAlignment="Left" Margin="242,290,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        
-        
+        <Button x:Name="btn_kondirator" Content="Kondirator" HorizontalAlignment="Left" Margin="214,171,0,0" VerticalAlignment="Top" Width="300" Height="80"/>
+        <Button x:Name="btn_shredder" Content="Shredder" HorizontalAlignment="Left" Margin="214,266,0,0" VerticalAlignment="Top" Width="300" Height="80"/>
+        <Button x:Name="btn_schere" Content="Schere" HorizontalAlignment="Left" Margin="214,365,0,0" VerticalAlignment="Top" Width="300" Height="80"/>
+        <Button x:Name="btn_net" Content="NET" HorizontalAlignment="Left" Margin="542,266,0,0" VerticalAlignment="Top" Width="300" Height="80"/>
+        <Button x:Name="btn_ssa2" Content="SSA II" HorizontalAlignment="Left" Margin="542,367,0,0" VerticalAlignment="Top" Width="300" Height="80"/>
+        <Button x:Name="btn_ssa2innen" Content="SSA II (innen)" HorizontalAlignment="Left" Margin="380,480,0,0" VerticalAlignment="Top" Width="300" Height="80"/>
+        <Button x:Name="btn_rsa_xray" Content="RSA / X-Ray" HorizontalAlignment="Left" Margin="542,171,0,0" VerticalAlignment="Top" Width="300" Height="80"/>
+
+
     </Grid>
 </Page>

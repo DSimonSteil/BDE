@@ -19,10 +19,16 @@ namespace BDE_MDE
     /// Interaction logic for Login.xaml
     /// </summary>
     public partial class Login : Page
-    {
+    {        
         public Login()
         {
             InitializeComponent();
-        }                
+        }
+
+        private void btn_backToMain_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeFacility cp = new ChangeFacility();
+            this.NavigationService.Navigate(cp);
+        }
     }
 }
