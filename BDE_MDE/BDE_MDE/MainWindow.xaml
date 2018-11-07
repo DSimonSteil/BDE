@@ -7,20 +7,24 @@
         mc:Ignorable="d"
         Title="BDE/MDE" ResizeMode="NoResize" Height="768" Width="1024" Icon="logo_small.ico">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="653*"/>
+            <ColumnDefinition Width="96*"/>
+            <ColumnDefinition Width="269*"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-            <TextBox Name="tbx_actualTime" Text="Time" Width="120" FontSize="16" TextWrapping="Wrap" IsEnabled="False"/>
-            <TextBox Name="tbx_actualUser" Text="User" Width="120" FontSize="16" TextWrapping="Wrap" IsEnabled="False"/>
-            <TextBox Name="tbx_sign" Text="Sign" Width="150" FontSize="16" TextWrapping="Wrap" IsEnabled="False"/>
-            <TextBox Name="tbx_facility" Text="Facilty" Width="150" FontSize="16" TextWrapping="Wrap" IsEnabled="False"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="#FFD5E8D4" Grid.ColumnSpan="3">
+            <TextBox Name="tbx_actualTime" Text="Time" Width="120" FontSize="16" TextWrapping="Wrap" IsEnabled="False" FontWeight="Bold"/>
+            <TextBox Name="tbx_actualUser" Text="User" Width="120" FontSize="16" TextWrapping="Wrap" IsEnabled="False" FontWeight="Bold"/>
+            <TextBox Name="tbx_facility" Text="Facilty" Width="150" FontSize="16" TextWrapping="Wrap" IsEnabled="False" FontWeight="Bold"/>
 
-            <Button x:Name="btn_facilities" Content="Anlage wechseln" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Width="200" Height="80" Click="btn_login_Click"/>
-            <Button x:Name="btn_logout" Content="Logout" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="200" Height="80" Click="btn_login_Click"/>
+            <Button x:Name="btn_facilities" Content="Anlage wechseln" HorizontalAlignment="Left" Margin="150,0,0,0" VerticalAlignment="Top" Width="200" Height="80" Click="btn_login_Click" Background="#FFB0D99D" FontSize="16" FontWeight="Bold"/>
+            <Button x:Name="btn_logout" Content="Logout" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="200" Height="80" Click="btn_login_Click" Background="#FFB0D99D" FontSize="16" FontWeight="Bold"/>
 
         </StackPanel>
 
-        <TextBox x:Name="tbx_feedback" HorizontalAlignment="Left" Height="23" Margin="10,706,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944"/>
+        <TextBox x:Name="tbx_feedback" HorizontalAlignment="Left" Height="23" Margin="10,706,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="944" Grid.ColumnSpan="3"/>
 
-        <Frame x:Name="MainFrame" Margin="0,90,0,0"/>
+        <Frame x:Name="MainFrame" Margin="-1,90,1,0" FontSize="20" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

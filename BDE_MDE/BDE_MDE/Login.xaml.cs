@@ -26,9 +26,9 @@ namespace BDE_MDE
         }
 
         private void btn_backToMain_Click(object sender, RoutedEventArgs e)
-        {
+        {           
             ChangeFacility cp = new ChangeFacility();
-            this.NavigationService.Navigate(cp);
+            this.NavigationService.Navigate(cp);                        
         }
     }
 }
