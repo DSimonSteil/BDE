@@ -10,7 +10,7 @@
 
     <Grid Background="#FFEEEEEE">
 
-        <Button x:Name="btn_kondirator" Content="Kondirator" HorizontalAlignment="Left" Margin="70,40,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontWeight="Bold" FontSize="16"/>
+        <Button x:Name="btn_kondirator" Content="Kondirator" HorizontalAlignment="Left" Margin="70,40,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontWeight="Bold" FontSize="16" Click="btn_kondirator_Click"/>
         <Button x:Name="btn_tma" Content="TMA" HorizontalAlignment="Left" Margin="559,40,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontWeight="Bold" FontSize="16"/>
         <Button x:Name="btn_shredder" Content="Shredder" HorizontalAlignment="Left" Margin="70,145,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontWeight="Bold" FontSize="16"/>
         <Button x:Name="btn_schere" Content="Schere" HorizontalAlignment="Left" Margin="70,250,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontWeight="Bold" FontSize="16"/>
@@ -18,7 +18,7 @@
         <Button x:Name="btn_ssa2" Content="SSA II (innen)" HorizontalAlignment="Left" Margin="559,250,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontWeight="Bold" FontSize="16"/>
         <Button x:Name="btn_ssa2innen" Content="SSA II (innen)" HorizontalAlignment="Left" Margin="559,355,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontWeight="Bold" FontSize="16"/>
         <Button x:Name="btn_rsa_xray" Content="RSA / X-Ray" HorizontalAlignment="Left" Margin="70,355,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontWeight="Bold" FontSize="16"/>
-        <Button x:Name="btn_birdview" Content="Luftbild" HorizontalAlignment="Left" Margin="70,485,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFBBBBBB" FontWeight="Bold" FontSize="16"/>
+        <Button x:Name="btn_birdview" Content="Luftbild" HorizontalAlignment="Left" Margin="70,485,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFBBBBBB" FontWeight="Bold" FontSize="16" Click="btn_birdview_Click"/>
         <Button x:Name="btn_cancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="559,485,0,0" VerticalAlignment="Top" Width="400" Height="100" FontWeight="Bold" FontSize="16" Background="#FFEC4E4E"/>
 
 

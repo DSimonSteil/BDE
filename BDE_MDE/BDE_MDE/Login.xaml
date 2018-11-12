@@ -10,11 +10,12 @@
 
     
 
-    <Grid Background="White">
-        <Label x:Name="lbl_rfID" Content="Bitte halten Sie ihren RFID Chip an den Terminal" HorizontalAlignment="Left" Margin="284,157,0,0" VerticalAlignment="Top" Height="59" Width="436" FontSize="20"/>
-        <Button x:Name="btn_loginManual" Content="Manuell anmelden" HorizontalAlignment="Left" Margin="388,328,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_loginProblems" Content="Probleme bei Login" HorizontalAlignment="Left" Margin="388,400,0,0" VerticalAlignment="Top" Width="200" Height="50"/>
-        <Button x:Name="btn_backToMain" Content="Zurück" HorizontalAlignment="Left" Margin="388,480,0,0" VerticalAlignment="Top" Width="200" Height="50" Click="btn_backToMain_Click" />
-
+    <Grid Background="#FFEEEEEE">
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Margin="0,250,0,0" FontSize="18" FontWeight="Bold" >
+                Bitte halten Sie ihren Mitarbeiter-Coin an den RFID-Leser des Terminal!
+            </TextBlock>
+            <Button x:Name="btn_loginSimulation" Content="Login simulieren" Width="300" Height="100" Margin="0,50,0,0" Click="btn_loginSimulation_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

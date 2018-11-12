@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.DirectoryServices.AccountManagement;
 using System.Windows.Threading;
+using System.Xml;
 
 namespace BDE_MDE
 {
@@ -24,17 +25,22 @@ namespace BDE_MDE
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
             MainFrame.Content = new Login();
+
             tbx_actualUser.Text = @"Fahrer: " + System.Environment.NewLine + System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
-            tbx_facility.Text = @"Aktuelle Maschine: " + System.Environment.NewLine + @"Testmaschine";            
+            //tbx_facility.Text = @"Aktuelle Maschine: " + System.Environment.NewLine + @"Testmaschine";            
 
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 this.tbx_actualTime.Text = DateTime.Now.ToString();
             }, this.Dispatcher);
+
+            //XmlReader xr = new XmlReader();
+            //xr.ReadXmlParameters();
         }
 
+        #region Controls
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -47,24 +53,28 @@ namespace BDE_MDE
             }
         }
 
-        private void btn_radlader_Click(object sender, RoutedEventArgs e)
+        private void btn_facilty_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                MainFrame.Content = new ChangeFacility();                
+                MainFrame.Content = new ChangeFacility();
             }
             catch (Exception exc)
             {
                 Feedback(exc);
             }
         }
+        #endregion Controls
 
-
-        private void Feedback(Exception exc)
+        #region Feedback
+        public void Feedback(Exception exc)
         {
             tbx_feedback.Visibility = Visibility.Visible;
             tbx_feedback.Text += exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name 
                 + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine;
         }        
+        #endregion Feedback
     }
+
+    
 }

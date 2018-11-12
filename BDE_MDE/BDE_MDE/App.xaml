@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:BDE_MDE"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <BitmapImage x:Key="img_platzLuftbild" UriSource="C:\images\platz_luftbild.png" />
+        <BitmapImage x:Key="img_kondiratorLuftbild" UriSource="C:\images\kondi_luftbild.png" />
+        
     </Application.Resources>
 </Application>

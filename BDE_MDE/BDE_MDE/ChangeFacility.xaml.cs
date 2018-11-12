@@ -22,7 +22,19 @@ namespace BDE_MDE
     {
         public ChangeFacility()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        private void btn_birdview_Click(object sender, RoutedEventArgs e)
+        {
+            ViewArea va = new ViewArea();
+            this.NavigationService.Navigate(va);
+        }
+
+        private void btn_kondirator_Click(object sender, RoutedEventArgs e)
+        {
+            FaciltyKondirator fk = new FaciltyKondirator("Test");
+            this.NavigationService.Navigate(fk);
         }
     }
 }

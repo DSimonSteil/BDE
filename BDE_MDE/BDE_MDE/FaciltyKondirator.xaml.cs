@@ -16,22 +16,17 @@ using System.Windows.Shapes;
 namespace BDE_MDE
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for FaciltyKondirator.xaml
     /// </summary>
-    public partial class Login : Page
-    {        
-        public Login()
+    public partial class FaciltyKondirator : Page
+    {
+        public FaciltyKondirator(string str_machineName)
         {
-            InitializeComponent();           
-        }       
-
-        private void btn_loginSimulation_Click(object sender, RoutedEventArgs e)
-        {
+            InitializeComponent();
             MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mw.btn_facilities.IsEnabled = true;                                
-        
-            ChangeFacility cF = new ChangeFacility();
-            this.NavigationService.Navigate(cF);            
+            mw.tbx_facility.Text = @"Aktuelle Maschine: " + System.Environment.NewLine + @"Kondirator";
+
+            MessageBox.Show(str_machineName);
         }
     }
 }
