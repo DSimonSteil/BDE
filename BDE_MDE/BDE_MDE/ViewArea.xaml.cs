@@ -33,8 +33,8 @@ namespace BDE_MDE
             {
                 Button btn = sender as Button;
                 
-                FaciltyKondirator fk = new FaciltyKondirator(btn.Name);
-                this.NavigationService.Navigate(fk);
+                Facilities fac = new Facilities(btn.Content.ToString());
+                this.NavigationService.Navigate(fac);
             }
             catch (Exception exc)
             {
@@ -47,13 +47,13 @@ namespace BDE_MDE
         {
             try
             {
-                XmlDocument xmlDocument = new XmlDocument();                
+                XmlDocument xml_configFile = new XmlDocument();                
                 string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
                 string str_values;
                 string[] stra_coords;
 
-                xmlDocument.Load(path);
-                XmlNodeList xnList = xmlDocument.SelectNodes(@"BDE.Configuration/Trier/platz_luftbild");
+                xml_configFile.Load(path);
+                XmlNodeList xnList = xml_configFile.SelectNodes(@"BDE.Configuration/Trier/platz_luftbild");
 
                 SolidColorBrush mySolidColorBrush = new SolidColorBrush();
                 mySolidColorBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFB0D99D"));

@@ -33,8 +33,8 @@ namespace BDE_MDE
 
         private void btn_kondirator_Click(object sender, RoutedEventArgs e)
         {
-            FaciltyKondirator fk = new FaciltyKondirator("Test");
-            this.NavigationService.Navigate(fk);
+            Facilities fac = new Facilities(btn_kondirator.Content.ToString());
+            this.NavigationService.Navigate(fac);
         }
     }
 }

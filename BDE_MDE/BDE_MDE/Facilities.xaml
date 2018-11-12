@@ -9,6 +9,7 @@
       Title="Facilities">
 
     <Grid>
-        
+        <Image Name="img_actualFacilty" Height="640" VerticalAlignment="Top" Width="1024" />
+
     </Grid>
 </Page>
