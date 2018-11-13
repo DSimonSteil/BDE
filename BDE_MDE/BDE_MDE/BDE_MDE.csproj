@@ -78,22 +78,14 @@
     <Compile Include="Facilities.xaml.cs">
       <DependentUpon>Facilities.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FaciltyKondirator.xaml.cs">
-      <DependentUpon>FaciltyKondirator.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewArea.xaml.cs">
       <DependentUpon>ViewArea.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XmlReader.cs" />
     <Page Include="ChangeFacility.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Facilities.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FaciltyKondirator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
