@@ -81,6 +81,9 @@
     <Compile Include="Scale.xaml.cs">
       <DependentUpon>Scale.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScaleProcess.xaml.cs">
+      <DependentUpon>ScaleProcess.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewArea.xaml.cs">
       <DependentUpon>ViewArea.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Scale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScaleProcess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

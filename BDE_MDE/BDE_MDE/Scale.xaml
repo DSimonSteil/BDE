@@ -9,18 +9,15 @@
       Title="Scale">
 
     <Grid Background="#FFD7D7D7">
-        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430" Name="tbx_actualFacility" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
-        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,145,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430" Name="tbx_actualBox" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
-        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,280,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430" Name="tbx_actualWeight" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,10,0,0"  VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430" Name="tbx_actualFacility" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,145,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430" Name="tbx_actualBox" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,280,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="Gewicht" VerticalAlignment="Top" Width="430" Name="tbx_actualWeight" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="125" Margin="538,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="Gefahrenes Material" VerticalAlignment="Top" Width="430" Name="tbx_actualMaterial" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="125" Margin="538,280,0,0" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="430" Name="tbx_lastScale" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
         <Button x:Name="btn_scale" Content="Wiegen" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" Width="430" Height="90" Background="#FFB0D99D" FontSize="25" FontWeight="Bold" Click="btn_scale_Click"/>
         <Button x:Name="btn_cancel" Content="Box schließen" HorizontalAlignment="Left" Margin="10,520,0,0" VerticalAlignment="Top" Width="430" Height="90" Background="#FFEC4E4E" FontSize="25" FontWeight="Bold"/>
-        <DataGrid Name="dgv_scales" FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" Height="419" Margin="445,145,0,0" VerticalAlignment="Top" Width="525">
-            <DataGrid.Columns>
-
-               
-
-            </DataGrid.Columns>
-        </DataGrid>
+        <Image HorizontalAlignment="Left" Height="100" Margin="793,466,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_deleteLastScale" Content="Letzte Wiegung löschen" HorizontalAlignment="Left" Margin="704,420,0,0" VerticalAlignment="Top" Width="264" Height="90"/>
 
 
     </Grid>

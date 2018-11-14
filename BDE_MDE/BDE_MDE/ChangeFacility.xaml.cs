@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,6 @@ using System.Xml;
 
 namespace BDE_MDE
 {
-    /// <summary>
-    /// Interaction logic for ChangeFacility.xaml
-    /// </summary>
     public partial class ChangeFacility : Page
     {
         #region Variables
@@ -60,6 +58,13 @@ namespace BDE_MDE
                 xml_configFile.Load(str_configFilePath);
                 str_branch = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Branch").Attributes[@"value"].Value;
 
+                if (xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Area_view").Attributes[@"value"].Value == "yes")
+                {
+                    btn_birdview.IsEnabled = true;
+                    btn_birdview.Visibility = Visibility.Visible;
+                }
+                else { }
+
                 XmlNodeList xnList = xml_configFile.SelectNodes(@"BDE.Configuration/" + str_branch + "/Aerial_image");
 
                 SolidColorBrush mySolidColorBrush = new SolidColorBrush();
@@ -71,8 +76,7 @@ namespace BDE_MDE
                     {                        
                         Button btn = new Button()
                         {
-                            BorderBrush = System.Windows.Media.Brushes.White,
-                            //BorderThickness = new Thickness(2),
+                            BorderBrush = System.Windows.Media.Brushes.White,                            
                             Name = xn2.Name,
                             Content = xn2.Name,
                             Background = mySolidColorBrush,

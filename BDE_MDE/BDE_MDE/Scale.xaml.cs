@@ -51,28 +51,12 @@ namespace BDE_MDE
         {
             try
             {
-                List<ScaleProcess> weight = new List<ScaleProcess>();
-                weight.Add(new ScaleProcess() { Box = int_box, Datum = DateTime.Now.ToLocalTime(), Gewicht = DateTime.Now.Year.ToString()});
                 
-                dgv_scales.ItemsSource = weight;
-
-
             }
             catch (Exception exc)
             {
                 Feedback(exc);
             }
         }        
-    }
-    public class ScaleProcess
-    {
-        public int Box { get; set; }
-        public DateTime Datum { get; set; }
-        public string Gewicht { get; set; }
-    }
-
-    
-
-        
-
+    }                
 }

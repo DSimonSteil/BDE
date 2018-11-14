@@ -1,0 +1,25 @@
+﻿<Page x:Class="BDE_MDE.ScaleProcess"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BDE_MDE"
+      mc:Ignorable="d" 
+      d:DesignHeight="640" d:DesignWidth="1024"
+      Title="ScaleProcess">
+
+    <Grid Background="#FFD7D7D7">
+        <WrapPanel Name="wp_scaleProcess" HorizontalAlignment="Center" Height="619"  VerticalAlignment="Top" Width="888" Margin="68,0">
+            <TextBox Name="tbx_facility"  Text="Anlage" Margin="0,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_date"  Text="Datum" Margin="50,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_boxID"  Text="Box" Margin="0,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_time"  Text="Uhrzeit" Margin="50,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_weight"  Text="Gewicht" Margin="0,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_employee"  Text="Mitarbeiter" Margin="50,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+            <Button x:Name="btn_confirm" Content="Bestätigen" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontSize="25" FontWeight="Bold"/>
+            <Button x:Name="btn_cancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFEC4E4E" FontSize="25" FontWeight="Bold"/>
+        </WrapPanel>
+
+
+    </Grid>
+</Page>
