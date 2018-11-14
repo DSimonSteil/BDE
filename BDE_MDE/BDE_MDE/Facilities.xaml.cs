@@ -27,6 +27,7 @@ namespace BDE_MDE
         private string str_faciltyImgPath = String.Empty;
         private string str_values = String.Empty;
         private string[] stra_coords;
+        private string str_actualFac = String.Empty;
         #endregion
 
         public Facilities(string str_actualFacility)
@@ -34,6 +35,7 @@ namespace BDE_MDE
             InitializeComponent();
             RenderFacility(str_actualFacility);
             CreateBoxes(str_actualFacility);
+            str_actualFac = str_actualFacility;
         }
 
         public void RenderFacility(string str_actualFacility)
@@ -116,11 +118,10 @@ namespace BDE_MDE
         {
             try
             {
-                MessageBox.Show("Dem Developer zum Gruße!");
-                //Button btn = sender as Button;
+                Button btn = sender as Button;
 
-                //Facilities fac = new Facilities(btn.Content.ToString());
-                //this.NavigationService.Navigate(fac);
+                Scale sca = new Scale(btn.Content.ToString(), str_actualFac);
+                this.NavigationService.Navigate(sca);
             }
             catch (Exception exc)
             {

@@ -78,6 +78,9 @@
     <Compile Include="Facilities.xaml.cs">
       <DependentUpon>Facilities.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scale.xaml.cs">
+      <DependentUpon>Scale.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewArea.xaml.cs">
       <DependentUpon>ViewArea.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Scale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewArea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
