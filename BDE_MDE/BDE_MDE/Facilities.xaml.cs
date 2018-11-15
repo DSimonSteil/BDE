@@ -120,7 +120,7 @@ namespace BDE_MDE
             {
                 Button btn = sender as Button;
 
-                Scale sca = new Scale(btn.Content.ToString(), str_actualFac);
+                Scale sca = new Scale(this, btn.Content.ToString(), str_actualFac);
                 this.NavigationService.Navigate(sca);
             }
             catch (Exception exc)
