@@ -21,14 +21,18 @@ namespace BDE_MDE
     {
         #region Variables
         private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
-        private string str_branch = String.Empty;        
+        private string str_branch = String.Empty;
         #endregion
+
+        #region Constructor
         public ChangeFacility()
         {
             InitializeComponent();
             CreateFacilityButtons();
         }
+        #endregion
 
+        #region Controls
         private void btn_birdview_Click(object sender, RoutedEventArgs e)
         {
             ViewArea va = new ViewArea();
@@ -49,7 +53,9 @@ namespace BDE_MDE
                 Feedback(exc);
             }
         }
+        #endregion
 
+        #region Help Methods
         private void CreateFacilityButtons()
         {            
             try
@@ -97,11 +103,14 @@ namespace BDE_MDE
                 Feedback(exc);
             }                       
         }
+        #endregion
 
+        #region Feedback
         private void Feedback(Exception exc)
         {
             MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
                + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
         }
+        #endregion
     }
 }

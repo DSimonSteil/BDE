@@ -17,16 +17,15 @@ using System.IO.Ports;
 using System.Xml;
 
 namespace BDE_MDE
-{
-    /// <summary>
-    /// Interaction logic for Scale.xaml
-    /// </summary>
+{    
     public partial class Scale : Page
     {
         #region Variables        
         private Facilities fc;
         private SerialPort sp_scaleListening;
         private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
+        private XmlDocument xml_configFile;
+        private string str_xmlDestinationPath;
         #endregion
 
         #region Constructor
@@ -54,7 +53,7 @@ namespace BDE_MDE
         {
             try
             {
-                XmlDocument xml_configFile = new XmlDocument();
+                xml_configFile = new XmlDocument();
                 xml_configFile.Load(str_configFilePath);                
                 string str_serialPort = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Serial-Port").Attributes[@"value"].Value;
                 string str_baudRate = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Baudrate").Attributes[@"value"].Value;
@@ -149,7 +148,32 @@ namespace BDE_MDE
                 MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Letzte Wiegung wirklich löschen?", "Lösch-Bestätigung", System.Windows.MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
+                    CreateDeleteXML();
+                    btn_deleteLastScale.IsEnabled = false;
+                    tbx_lastScale.Text = @"erfolgreich gelöscht";
+                }
+                else { }
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+        #endregion
 
+        #region Help Methods
+        private void CreateDeleteXML()
+        {
+            try
+            {                            
+                str_xmlDestinationPath = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/ScalePath").Attributes[@"value"].Value;
+                                
+                using (XmlWriter writer = XmlWriter.Create(str_xmlDestinationPath + "/ToDelete_" + DateTime.Now.Ticks + ".xml"))
+                {                                        
+                    writer.WriteStartElement("ToDelete");
+                    writer.WriteElementString("GUID", lbl_lastWeightGuid.Content.ToString());
+                    writer.WriteEndElement();
+                    writer.Flush();
                 }
             }
             catch (Exception exc)

@@ -84,6 +84,9 @@
     <Compile Include="ScaleProcess.xaml.cs">
       <DependentUpon>ScaleProcess.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewArea.xaml.cs">
       <DependentUpon>ViewArea.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ScaleProcess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,6 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo_small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="rüstung.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

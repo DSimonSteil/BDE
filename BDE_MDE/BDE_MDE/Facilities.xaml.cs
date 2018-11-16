@@ -16,9 +16,6 @@ using System.Xml;
 
 namespace BDE_MDE
 {
-    /// <summary>
-    /// Interaction logic for Facilities.xaml
-    /// </summary>
     public partial class Facilities : Page
     {
         #region Variables
@@ -30,6 +27,7 @@ namespace BDE_MDE
         private string str_actualFac = String.Empty;
         #endregion
 
+        #region Constructor
         public Facilities(string str_actualFacility)
         {
             InitializeComponent();
@@ -37,7 +35,26 @@ namespace BDE_MDE
             CreateBoxes(str_actualFacility);
             str_actualFac = str_actualFacility;
         }
+        #endregion
 
+        #region Controls
+        private void btn_button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button btn = sender as Button;
+
+                Scale sca = new Scale(this, btn.Content.ToString(), str_actualFac);
+                this.NavigationService.Navigate(sca);
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+        #endregion
+
+        #region Help Methods
         public void RenderFacility(string str_actualFacility)
         {
             try
@@ -113,26 +130,14 @@ namespace BDE_MDE
                 Feedback(exc);
             }
         }
+        #endregion
 
-        private void btn_button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Button btn = sender as Button;
-
-                Scale sca = new Scale(this, btn.Content.ToString(), str_actualFac);
-                this.NavigationService.Navigate(sca);
-            }
-            catch (Exception exc)
-            {
-                Feedback(exc);
-            }
-        }
-
+        #region Feedback
         private void Feedback(Exception exc)
         {
             MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
                 + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);            
         }
+        #endregion
     }
 }

@@ -18,11 +18,9 @@ using System.Xml;
 
 namespace BDE_MDE
 {
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
-    {        
+    {
+        #region Constructor
         public MainWindow()
         {
             InitializeComponent();            
@@ -39,6 +37,7 @@ namespace BDE_MDE
             //XmlReader xr = new XmlReader();
             //xr.ReadXmlParameters();
         }
+        #endregion
 
         #region Controls
         private void btn_login_Click(object sender, RoutedEventArgs e)
@@ -57,6 +56,8 @@ namespace BDE_MDE
         {
             try
             {
+                object o = MainFrame.Content;
+
                 MainFrame.Content = new ChangeFacility();
             }
             catch (Exception exc)

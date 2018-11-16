@@ -8,7 +8,7 @@
       d:DesignHeight="768" d:DesignWidth="1024"      
       Title="Login">
 
-    
+
 
     <Grid Background="#FFEEEEEE">
         <StackPanel HorizontalAlignment="Center">
@@ -17,5 +17,10 @@
             </TextBlock>
             <Button x:Name="btn_loginSimulation" Content="Login simulieren" Width="300" Height="100" Margin="0,50,0,0" Click="btn_loginSimulation_Click"/>
         </StackPanel>
+        <Button Name="btn_settings" Width="100" Height="100" Margin="880,520,0,0" Background="{x:Null}" BorderThickness="0" Click="btn_settings_Click">
+            <Image Source="rüstung.ico">
+
+            </Image>
+        </Button>
     </Grid>
 </Page>
