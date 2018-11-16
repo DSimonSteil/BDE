@@ -23,6 +23,8 @@ namespace BDE_MDE
         private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
         private string str_weightGuid = String.Empty;
         #endregion
+
+        #region Constructor
         public ScaleProcess(Scale scale, string str_facility, string str_boxID, string str_actualWeight)
         {
             InitializeComponent();
@@ -35,7 +37,9 @@ namespace BDE_MDE
             tbx_weight.Text = str_actualWeight;
             tbx_employee.Text = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
         }
+        #endregion
 
+        #region Controls
         private void Btn_confirm_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -43,9 +47,14 @@ namespace BDE_MDE
                 CreateScaleXML();
                            
                 NavigationService.Navigate(sc);
-                sc.tbx_lastScale.Text = tbx_weight.Text;
+
+                sc.tbx_lastScale.Text = @"Letzte Wiegung:" + System.Environment.NewLine + 
+                                         tbx_boxID.Text + @" Uhrzeit: " + tbx_time.Text + System.Environment.NewLine + 
+                                         @"Gewicht: " + tbx_weight.Text;
+                sc.btn_deleteLastScale.IsEnabled = true;
                 sc.tbx_actualWeight.Text = String.Empty;                
                 sc.tbx_actualWeight.IsEnabled = false;
+                sc.btn_scale.IsEnabled = false;
                 sc.lbl_lastWeightGuid.Content = str_weightGuid;
             }
             catch (Exception exc)
@@ -65,7 +74,9 @@ namespace BDE_MDE
                 Feedback(exc);
             }
         }
+        #endregion
 
+        #region Help Methods
         private void CreateScaleXML()
         {
             try
@@ -98,11 +109,14 @@ namespace BDE_MDE
                 Feedback(exc);
             }
         }
+        #endregion
 
+        #region Feedback
         private void Feedback(Exception exc)
         {
             MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
                + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
-        }        
+        }
+        #endregion
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Ports;
+using System.Xml;
 
 namespace BDE_MDE
 {
@@ -22,11 +23,13 @@ namespace BDE_MDE
     /// </summary>
     public partial class Scale : Page
     {
-        #region Variables
-        
+        #region Variables        
         private Facilities fc;
         private SerialPort sp_scaleListening;
+        private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
         #endregion
+
+        #region Constructor
         public Scale(Facilities facility, string str_actualBox, string str_actualFacility)
         {
             try
@@ -43,18 +46,26 @@ namespace BDE_MDE
             {
                 Feedback(exc);
             }            
-        }        
+        }
+        #endregion
 
+        #region DataListener/DataReceiver
         private void ScaleListener()
         {
             try
             {
-                sp_scaleListening = new SerialPort("COM3");
+                XmlDocument xml_configFile = new XmlDocument();
+                xml_configFile.Load(str_configFilePath);                
+                string str_serialPort = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Serial-Port").Attributes[@"value"].Value;
+                string str_baudRate = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Baudrate").Attributes[@"value"].Value;
+                string str_dataBits = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/DataBits").Attributes[@"value"].Value;
 
-                sp_scaleListening.BaudRate = 115200;
+                sp_scaleListening = new SerialPort(str_serialPort);
+
+                sp_scaleListening.BaudRate = Convert.ToInt32(str_baudRate);
                 sp_scaleListening.Parity = Parity.None;
                 sp_scaleListening.StopBits = StopBits.One;
-                sp_scaleListening.DataBits = 8;
+                sp_scaleListening.DataBits = Convert.ToInt32(str_dataBits);
                 sp_scaleListening.Handshake = Handshake.None;
 
                 sp_scaleListening.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);                
@@ -70,20 +81,16 @@ namespace BDE_MDE
         {
             try
             {
-                Dispatcher.Invoke(new Action(delegate ()
-                {
-                    tbx_actualWeight.Text = String.Empty;                    
-                }));
-
                 string str_scaleOutput = String.Empty;
 
                 string[] stra_weight;
 
                 SerialPort sp = sender as SerialPort;
-                
 
-                //string str_weight = sp.ReadExisting().Replace("\r\n", string.Empty) + " kg";
-
+                Dispatcher.Invoke(new Action(delegate ()
+                {
+                    tbx_actualWeight.Text = String.Empty;                    
+                }));                                
 
                 while (sp.BytesToRead > 0)
                 {
@@ -95,7 +102,7 @@ namespace BDE_MDE
 
                 Dispatcher.Invoke(new Action(delegate ()
                 {
-                    tbx_actualWeight.Text = tbx_actualWeight.Text + (stra_weight[8]);//+ System.Convert.ToString(charToRead);
+                    tbx_actualWeight.Text = stra_weight[8].Replace("\r\n", String.Empty) + @"kg";//+ System.Convert.ToString(charToRead);
                     btn_scale.IsEnabled = true;
                 }));
 
@@ -106,7 +113,9 @@ namespace BDE_MDE
                 Feedback(exc);
             }                                    
         }
+        #endregion
 
+        #region Controls
         private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -133,11 +142,29 @@ namespace BDE_MDE
             }
         }
 
+        private void Btn_deleteLastScale_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Letzte Wiegung wirklich löschen?", "Lösch-Bestätigung", System.Windows.MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
 
+                }
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+        #endregion
+
+        #region Feedback
         private void Feedback(Exception exc)
         {
             MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
                + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
-        }                        
+        }
+        #endregion
     }                
 }
