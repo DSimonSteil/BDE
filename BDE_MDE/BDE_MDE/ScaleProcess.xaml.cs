@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace BDE_MDE
         private Scale sc;
         private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
         private string str_weightGuid = String.Empty;
+        private string[] stra_employee;
         #endregion
 
         #region Constructor
@@ -35,7 +37,8 @@ namespace BDE_MDE
             tbx_date.Text = DateTime.Now.Date.ToShortDateString();
             tbx_time.Text = DateTime.Now.ToString("HH:mm");
             tbx_weight.Text = str_actualWeight;
-            tbx_employee.Text = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
+            stra_employee = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().tbx_actualUser.Text.Split(':'); ;
+            tbx_employee.Text = stra_employee[1].Trim();
         }
         #endregion
 
@@ -91,7 +94,7 @@ namespace BDE_MDE
                 {
                     writer.WriteStartElement("Scale");
                     writer.WriteElementString("Branch", str_branch);
-                    writer.WriteElementString("Employee", System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName);
+                    writer.WriteElementString("Employee", tbx_employee.Text);
                     writer.WriteElementString("WeightDate", DateTime.Now.ToString("yyyyMMdd"));
                     writer.WriteElementString("WeightTime", DateTime.Now.ToString("HHmmss"));
                     writer.WriteElementString("Facility", tbx_facility.Text);
@@ -114,8 +117,9 @@ namespace BDE_MDE
         #region Feedback
         private void Feedback(Exception exc)
         {
-            MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
-               + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
+            Feedback fb = new Feedback();
+
+            fb.FeedbackHandler(exc);
         }
         #endregion
     }

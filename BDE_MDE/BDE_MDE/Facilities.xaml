@@ -7,9 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="640" d:DesignWidth="1024"
       Title="Facilities">
-
+    <Viewbox>
     <Grid Name="FacilityGrid">
         <Image Name="img_actualFacilty" Height="640" VerticalAlignment="Top" Width="1024" />
 
     </Grid>
+    </Viewbox>
 </Page>

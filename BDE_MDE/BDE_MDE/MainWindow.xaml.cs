@@ -15,18 +15,23 @@ using System.Windows.Shapes;
 using System.DirectoryServices.AccountManagement;
 using System.Windows.Threading;
 using System.Xml;
+using System.Net.Mail;
 
 namespace BDE_MDE
 {
     public partial class MainWindow : Window
     {
+        #region Variables
+        public string str_empNumber = String.Empty;
+        #endregion
+        
         #region Constructor
         public MainWindow()
         {
             InitializeComponent();            
             MainFrame.Content = new Login();
 
-            tbx_actualUser.Text = @"Fahrer: " + System.Environment.NewLine + System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
+            //tbx_actualUser.Text = @"Fahrer: " + System.Environment.NewLine + System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
             //tbx_facility.Text = @"Aktuelle Maschine: " + System.Environment.NewLine + @"Testmaschine";            
 
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
@@ -52,10 +57,25 @@ namespace BDE_MDE
             }
         }
 
-        private void btn_facilty_Click(object sender, RoutedEventArgs e)
+        private void btn_logout_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                btn_facilities.IsEnabled = false;
+                tbx_actualUser.Text = "Fahrer: ";
+                tbx_facility.Text = "Aktuelle Anlage: ";
+                MainFrame.Content = new Login();
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+
+        private void btn_facilty_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {                
                 object o = MainFrame.Content;
 
                 MainFrame.Content = new ChangeFacility();
@@ -70,9 +90,9 @@ namespace BDE_MDE
         #region Feedback
         public void Feedback(Exception exc)
         {
-            tbx_feedback.Visibility = Visibility.Visible;
-            tbx_feedback.Text += exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name 
-                + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine;
+            Feedback fb = new Feedback();
+
+            fb.FeedbackHandler(exc);
         }        
         #endregion Feedback
     }

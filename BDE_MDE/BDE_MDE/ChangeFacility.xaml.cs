@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -108,9 +109,22 @@ namespace BDE_MDE
         #region Feedback
         private void Feedback(Exception exc)
         {
-            MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
-               + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
+            Feedback fb = new Feedback();
+
+            fb.FeedbackHandler(exc);            
         }
         #endregion
+
+        private void Btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NavigationService.GoBack();
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
     }
 }

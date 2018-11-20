@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,9 +17,6 @@ using System.Xml;
 
 namespace BDE_MDE
 {
-    /// <summary>
-    /// Interaction logic for ViewArea.xaml
-    /// </summary>
     public partial class ViewArea : Page
     {
         #region Variables
@@ -27,12 +25,16 @@ namespace BDE_MDE
         private string str_values = String.Empty;
         private string[] stra_coords;
         #endregion
+
+        #region Constructor
         public ViewArea()
         {
             InitializeComponent();
             CreateFaciliteButtons();
         }
+        #endregion
 
+        #region Controls
         private void btn_button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -93,11 +95,15 @@ namespace BDE_MDE
                 Feedback(exc);
             }
         }
+        #endregion
 
+        #region Feedback
         private void Feedback(Exception exc)
         {
-            MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
-                + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
+            Feedback fb = new Feedback();
+
+            fb.FeedbackHandler(exc);
         }
+        #endregion
     }
 }

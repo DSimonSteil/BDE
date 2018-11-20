@@ -10,7 +10,7 @@
 
     <Grid Background="#FFEEEEEE">
         <Button x:Name="btn_birdview" IsEnabled="False" Visibility="Hidden" Content="Luftbild" HorizontalAlignment="Left" Margin="90,470,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFBBBBBB" FontWeight="Bold" FontSize="16" Click="btn_birdview_Click"/>
-        <Button x:Name="btn_cancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="520,470,0,0" VerticalAlignment="Top" Width="400" Height="100" FontWeight="Bold" FontSize="16" Background="#FFEC4E4E"/>
+        <Button x:Name="btn_cancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="520,470,0,0" VerticalAlignment="Top" Width="400" Height="100" FontWeight="Bold" FontSize="16" Background="#FFEC4E4E" Click="Btn_cancel_Click"/>
         <WrapPanel Name="wp_buttons" HorizontalAlignment="Center" Height="584"  VerticalAlignment="Top" Width="889"/>
 
 

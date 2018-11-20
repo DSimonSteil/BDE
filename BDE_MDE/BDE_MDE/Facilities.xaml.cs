@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,7 +64,7 @@ namespace BDE_MDE
                 img_actualFacilty.Source = new BitmapImage(new Uri(str_faciltyImgPath));
 
                 MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-                mw.tbx_facility.Text = @"Aktuelle Maschine: " + System.Environment.NewLine + str_actualFacility;
+                mw.tbx_facility.Text = @"Aktuelle Anlage: " + System.Environment.NewLine + str_actualFacility;
             }
             catch (Exception exc)
             {
@@ -135,8 +136,9 @@ namespace BDE_MDE
         #region Feedback
         private void Feedback(Exception exc)
         {
-            MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
-                + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);            
+            Feedback fb = new Feedback();
+
+            fb.FeedbackHandler(exc);
         }
         #endregion
     }

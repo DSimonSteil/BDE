@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Ports;
 using System.Xml;
+using System.Net.Mail;
 
 namespace BDE_MDE
 {    
@@ -26,6 +27,14 @@ namespace BDE_MDE
         private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
         private XmlDocument xml_configFile;
         private string str_xmlDestinationPath;
+        private int int_sleepTime = 0;
+        private MainWindow mw;
+
+        //private string str_branch;
+        //private string str_from;
+        //private string str_to;
+        //private string str_sign;
+        //private string str_mxsHost;
         #endregion
 
         #region Constructor
@@ -39,6 +48,9 @@ namespace BDE_MDE
                 tbx_actualFacility.Text = str_actualFacility;                
                 fc = facility;
                 ScaleListener();
+
+                mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw.btn_facilities.IsEnabled = false;
 
             }
             catch (Exception exc)
@@ -58,6 +70,8 @@ namespace BDE_MDE
                 string str_serialPort = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Serial-Port").Attributes[@"value"].Value;
                 string str_baudRate = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Baudrate").Attributes[@"value"].Value;
                 string str_dataBits = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/DataBits").Attributes[@"value"].Value;
+
+                int_sleepTime = Convert.ToInt32(xml_configFile.SelectSingleNode(@"BDE.Configuration/General/SleepScale").Attributes[@"value"].Value);
 
                 sp_scaleListening = new SerialPort(str_serialPort);
 
@@ -94,15 +108,22 @@ namespace BDE_MDE
                 while (sp.BytesToRead > 0)
                 {
                     str_scaleOutput = str_scaleOutput + (sp.ReadExisting());
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(int_sleepTime);
                 }
 
                 stra_weight = str_scaleOutput.Split(';');
 
                 Dispatcher.Invoke(new Action(delegate ()
                 {
-                    tbx_actualWeight.Text = stra_weight[8].Replace("\r\n", String.Empty) + @"kg";//+ System.Convert.ToString(charToRead);
-                    btn_scale.IsEnabled = true;
+                    try
+                    {
+                        tbx_actualWeight.Text = stra_weight[8].Replace("\r\n", String.Empty) + @"kg";//+ System.Convert.ToString(charToRead);
+                        btn_scale.IsEnabled = true;
+                    }
+                    catch (Exception exc)
+                    {
+                        Feedback(exc);
+                    }                    
                 }));
 
 
@@ -120,6 +141,7 @@ namespace BDE_MDE
             try
             {
                 sp_scaleListening.Close();
+                mw.btn_facilities.IsEnabled = true;
                 NavigationService.Navigate(fc);
             }
             catch (Exception exc)
@@ -186,9 +208,10 @@ namespace BDE_MDE
         #region Feedback
         private void Feedback(Exception exc)
         {
-            MessageBox.Show(exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name
-               + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
-        }
+            Feedback fb = new Feedback();
+
+            fb.FeedbackHandler(exc);
+        }        
         #endregion
     }                
 }
