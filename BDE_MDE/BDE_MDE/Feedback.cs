@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
+using System.Net.NetworkInformation;
 
 namespace BDE_MDE
 {
@@ -26,6 +27,10 @@ namespace BDE_MDE
 
             GetXmlInfos();
 
+            string str_hostName = System.Net.Dns.GetHostName();
+            System.Net.IPHostEntry hostInfo = System.Net.Dns.GetHostEntry(str_hostName);
+            string str_ipAdress = hostInfo.AddressList[1].ToString(); 
+
             MailMessage mail = new MailMessage(str_from, str_to);
             SmtpClient client = new SmtpClient();
             client.Port = 25;
@@ -34,10 +39,27 @@ namespace BDE_MDE
             client.Host = str_mxsHost;
             mail.Subject = "Fehler in Betriebsdatenerfassung";
             mail.Body = "Folgender Fehler ist aufgetreten: " + System.Environment.NewLine + System.Environment.NewLine + "Standort: "
-                        + str_branch + System.Environment.NewLine + "Fahrzeug: " + str_sign + System.Environment.NewLine + System.Environment.NewLine + exc.GetType().ToString() + @" @ " + exc.StackTrace
+                        + str_branch + System.Environment.NewLine + "Fahrzeug: " + str_sign + System.Environment.NewLine + "IP: " + str_ipAdress + System.Environment.NewLine + System.Environment.NewLine + exc.GetType().ToString() + @" @ " + exc.StackTrace
               + System.Environment.NewLine + exc.Message;
-            
-            client.Send(mail);
+
+            using (Ping myPing = new Ping())
+            {
+                try
+                {
+                    PingReply reply = myPing.Send(str_mxsHost, 1000);                    
+                    if (reply != null)
+                    {
+                        client.Send(mail);
+                        LOGtoFS.CreateTxtFile(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\LOGS\" + DateTime.Today.ToShortDateString() + @"_Log.txt");
+                        LOGtoFS.WriteLog(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\LOGS\" + DateTime.Today.ToShortDateString() + "_Log.txt", exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
+                    }                    
+                }
+                catch
+                {
+                    LOGtoFS.CreateTxtFile(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\LOGS\" + DateTime.Today.ToShortDateString() + @"_Log.txt");
+                    LOGtoFS.WriteLog(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\LOGS\" + DateTime.Today.ToShortDateString() + "_Log.txt", exc.GetType().ToString() + @" @ " + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name + System.Environment.NewLine + exc.Message + System.Environment.NewLine + System.Environment.NewLine);
+                }
+            }            
         }
         private void GetXmlInfos()
         {

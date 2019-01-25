@@ -24,12 +24,16 @@ namespace BDE_MDE
         #region Variables
         private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
         private string str_actualUser = String.Empty;
-        private string str_actualuserID = String.Empty;
+        private MainWindow mw;
         #endregion
+
         #region Constructor
         public Login()
         {
             InitializeComponent();
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.btn_logout.IsEnabled = false;
+            tbx_rfidNr.Focus();
         }
         #endregion
 
@@ -38,11 +42,13 @@ namespace BDE_MDE
         {
             try
             {
-                if (AuthorizeUser())
-                {
-                    MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                if (AuthorizeFromXML())
+                {                    
+                    mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                     mw.btn_facilities.IsEnabled = true;
+                    mw.btn_downtimes.IsEnabled = true;
                     mw.tbx_actualUser.Text = "Fahrer: " + System.Environment.NewLine + str_actualUser;
+                    mw.btn_logout.IsEnabled = true;
                     ChangeFacility cF = new ChangeFacility();
                     this.NavigationService.Navigate(cF);
                     cF.btn_cancel.IsEnabled = false;
@@ -58,6 +64,19 @@ namespace BDE_MDE
             }                    
         }
 
+        private void Btn_manualLogin_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {                
+                LoginManual lm = new LoginManual();
+                this.NavigationService.Navigate(lm);
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+
         private void btn_settings_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -70,57 +89,111 @@ namespace BDE_MDE
                 Feedback(exc);
             }
         }
+
+        private void Tbx_rfidNr_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Enter)
+                {
+                    if (AuthorizeFromXML())
+                    {
+                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                        mw.btn_facilities.IsEnabled = false;
+                        mw.btn_downtimes.IsEnabled = true;
+                        mw.tbx_actualUser.Text = "Fahrer: " + System.Environment.NewLine + str_actualUser;
+                        ChangeFacility cF = new ChangeFacility();
+                        this.NavigationService.Navigate(cF);
+                        cF.btn_cancel.IsEnabled = false;                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Keinen Benutzer gefunden");
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+        private void Tbx_rfidNr_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (String.Equals(tbx_rfidNr.Text.Length -1, System.Environment.NewLine))
+                {
+                    if (AuthorizeFromXML())
+                    {
+                        MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                        mw.btn_facilities.IsEnabled = true;
+                        mw.btn_downtimes.IsEnabled = true;
+                        mw.tbx_actualUser.Text = "Fahrer: " + System.Environment.NewLine + str_actualUser;
+                        ChangeFacility cF = new ChangeFacility();
+                        this.NavigationService.Navigate(cF);
+                        cF.btn_cancel.IsEnabled = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Keinen Benutzer gefunden");
+                    }
+                }
+                
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
         #endregion
 
-        #region Help Methods
-        private bool AuthorizeUser()
+        #region Help Methods        
+        private bool AuthorizeFromXML()
         {
             try
             {
                 XmlDocument xml_configFile = new XmlDocument();
+                XmlDocument xml_authFile = new XmlDocument();
+                string str_source = String.Empty;
+                
+
                 xml_configFile.Load(str_configFilePath);
 
                 string str_authorizePath = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Userdata").Attributes[@"value"].Value;
-                using (DataTable dt = new DataTable())
-                using (StreamReader sr = new StreamReader(str_authorizePath))
+
+                xml_authFile.Load(str_authorizePath);
+                
+                XmlElement rootNode = xml_authFile.DocumentElement;
+
+                if (tbx_rfidManuell.IsVisible && !String.IsNullOrEmpty(tbx_rfidManuell.Text))
                 {
-                    string[] headers = sr.ReadLine().Split(';');
-                    foreach (string header in headers)
-                    {
-                        dt.Columns.Add(header);
-                    }
-                    while (!sr.EndOfStream)
-                    {
-                        string[] rows = sr.ReadLine().Split(';');
-                        DataRow dr = dt.NewRow();
-                        for (int i = 0; i < headers.Length; i++)
-                        {
-                            dr[i] = rows[i];
-                        }
-                        dt.Rows.Add(dr);
-                    }
-
-                    string str_key = "Ztauswnr = " + tbx_rfidNr.Text;
-
-                    DataRow[] foundRows;
-
-                    foundRows = dt.Select(str_key);
-
-                    if (foundRows.Count() > 0)
-                    {
-                        str_actualUser = foundRows[0][6].ToString();                        
-                        Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().lbl_employeeID.Content = str_actualUser[5].ToString();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }                    
+                    str_source = tbx_rfidManuell.Text;
                 }
+                else
+                {
+                    str_source = tbx_rfidNr.Text;
+                }
+
+                foreach (XmlNode x in rootNode.ChildNodes)
+                {
+                    foreach (XmlNode y in x.SelectNodes("ZAUSW"))
+                    {
+                        if (y.InnerText.Equals(str_source))
+                        {
+                            str_actualUser = x["VORNA"].InnerText + " " + x["NACHN"].InnerText;
+                            ConfigClass.strEmpName = x["VORNA"].InnerText + " " + x["NACHN"].InnerText;
+                            ConfigClass.strEmpNo = x["PERNR"].InnerText;
+
+                            TimeReport.CreateReport("P10", "", "");
+                            return true;
+                        }                        
+                    }
+                }
+                return false;
             }
             catch (Exception)
             {
-                throw;                
+                throw;
             }
         }
         #endregion
@@ -132,6 +205,6 @@ namespace BDE_MDE
 
             fb.FeedbackHandler(exc);
         }
-        #endregion
+        #endregion        
     }
 }

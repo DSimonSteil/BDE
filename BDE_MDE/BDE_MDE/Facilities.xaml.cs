@@ -26,6 +26,7 @@ namespace BDE_MDE
         private string str_values = String.Empty;
         private string[] stra_coords;
         private string str_actualFac = String.Empty;
+        private XmlDocument xml_configFile;
         #endregion
 
         #region Constructor
@@ -34,7 +35,7 @@ namespace BDE_MDE
             InitializeComponent();
             RenderFacility(str_actualFacility);
             CreateBoxes(str_actualFacility);
-            str_actualFac = str_actualFacility;
+            str_actualFac = str_actualFacility;            
         }
         #endregion
 
@@ -45,8 +46,18 @@ namespace BDE_MDE
             {
                 Button btn = sender as Button;
 
-                Scale sca = new Scale(this, btn.Content.ToString(), str_actualFac);
-                this.NavigationService.Navigate(sca);
+                if(xml_configFile.SelectSingleNode(@"BDE.Configuration/General/ManualWeight").Attributes[@"value"].Value.Equals("yes"))
+                {
+                    ScalePage scalePage = new ScalePage(this, btn.Content.ToString(), str_actualFac);
+                    this.NavigationService.Navigate(scalePage);
+                }
+                else
+                {
+                    Scale sca = new Scale(this, btn.Content.ToString(), str_actualFac);
+                    this.NavigationService.Navigate(sca);
+                }
+                
+                TimeReport.CreateReport(@"B10", str_actualFac, btn.Content.ToString());
             }
             catch (Exception exc)
             {
@@ -64,6 +75,24 @@ namespace BDE_MDE
                 img_actualFacilty.Source = new BitmapImage(new Uri(str_faciltyImgPath));
 
                 MainWindow mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+
+                if(!mw.tbx_facility.Text.Contains(str_actualFacility))
+                {
+                    string[] stra_preFacility = mw.tbx_facility.Text.Split(':');
+                    if (!String.IsNullOrEmpty(stra_preFacility[1].Trim()))
+                    {
+                        TimeReport.CreateReport(@"P20", stra_preFacility[1].Trim(), "");
+                        TimeReport.CreateReport(@"P10", str_actualFacility, "");
+                    }
+                    else
+                    {
+                        TimeReport.CreateReport(@"P10", str_actualFacility, "");
+                    }
+                }
+                else
+                {
+                    
+                }
                 mw.tbx_facility.Text = @"Aktuelle Anlage: " + System.Environment.NewLine + str_actualFacility;
             }
             catch (Exception exc)
@@ -76,7 +105,7 @@ namespace BDE_MDE
         {
             try
             {
-                XmlDocument xml_configFile = new XmlDocument();                
+                xml_configFile = new XmlDocument();                
                 xml_configFile.Load(str_configFilePath);
 
                 str_branch = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Branch").Attributes[@"value"].Value;
@@ -116,7 +145,7 @@ namespace BDE_MDE
                                 Background = mySolidColorBrush,
                                 Margin = new Thickness(Convert.ToDouble(stra_coords[0]), Convert.ToDouble(stra_coords[1]), 0, 0),
                                 FontWeight = FontWeights.Bold,
-                                FontSize = 35,
+                                FontSize = 20,
                                 Width = Convert.ToDouble(stra_coords[2]),
                                 Height = Convert.ToDouble(stra_coords[3]),
                             };

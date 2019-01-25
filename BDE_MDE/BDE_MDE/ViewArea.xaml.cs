@@ -24,12 +24,17 @@ namespace BDE_MDE
         private string str_branch = String.Empty;
         private string str_values = String.Empty;
         private string[] stra_coords;
+        private string str_areaViewPath = String.Empty;
+        private MainWindow mw;
         #endregion
 
         #region Constructor
         public ViewArea()
         {
             InitializeComponent();
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.btn_facilities.IsEnabled = true;            
+            mw.btn_logout.IsEnabled = true;
             CreateFaciliteButtons();
         }
         #endregion
@@ -39,8 +44,7 @@ namespace BDE_MDE
         {
             try
             {
-                Button btn = sender as Button;
-                
+                Button btn = sender as Button;                
                 Facilities fac = new Facilities(btn.Content.ToString());
                 this.NavigationService.Navigate(fac);
             }
@@ -57,6 +61,9 @@ namespace BDE_MDE
                 XmlDocument xml_configFile = new XmlDocument();                                                
                 xml_configFile.Load(str_configFilePath);
                 str_branch = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Branch").Attributes[@"value"].Value;
+                str_areaViewPath = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/imagePath").Attributes[@"value"].Value;
+
+                img_area.Source = new BitmapImage(new Uri(str_areaViewPath));
 
                 XmlNodeList xnList = xml_configFile.SelectNodes(@"BDE.Configuration/" + str_branch + "/Aerial_image");
 

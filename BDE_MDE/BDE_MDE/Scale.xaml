@@ -9,14 +9,14 @@
       Title="Scale">
 
     <Grid Background="#FFD7D7D7">
-        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,10,0,0"  VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430" Name="tbx_actualFacility" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
-        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,145,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430" Name="tbx_actualBox" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
-        <TextBox HorizontalAlignment="Left" Height="125" Margin="10,280,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="430" Name="tbx_actualWeight" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
-        <TextBox HorizontalAlignment="Left" Height="125" Margin="538,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="Gefahrenes Material" VerticalAlignment="Top" Width="430" Name="tbx_actualMaterial" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
-        <TextBox HorizontalAlignment="Left" Height="125" Margin="538,280,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="430" Name="tbx_lastScale" FontSize="25" FontWeight="Bold" IsEnabled="False"/>
-        <Button x:Name="btn_scale" Content="Wiegen"  IsEnabled="False" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" Width="430" Height="90" Background="#FFB0D99D" FontSize="25" FontWeight="Bold" Click="btn_scale_Click"/>
-        <Button x:Name="btn_cancel" Content="Box schließen" HorizontalAlignment="Left" Margin="10,520,0,0" VerticalAlignment="Top" Width="430" Height="90" Background="#FFEC4E4E" FontSize="25" FontWeight="Bold" Click="Btn_cancel_Click"/>
-        <Button x:Name="btn_deleteLastScale" Background="#FFEC4E4E" IsEnabled="False" Content="Letzte Wiegung löschen" HorizontalAlignment="Left" Margin="538,420,0,0" VerticalAlignment="Top" Width="430" Height="90" FontWeight="Bold" FontSize="25" Click="Btn_deleteLastScale_Click"/>
-        <Label Name="lbl_lastWeightGuid" Content="GUID letzte Wiegung" HorizontalAlignment="Left" Margin="538,548,0,0" VerticalAlignment="Top" Width="430"/>
+        <TextBox HorizontalAlignment="Left" Height="180" Margin="30,10,0,0"  VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="460" Name="tbx_actualFacility" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="180" Margin="30,200,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="460" Name="tbx_actualBox" FontSize="36" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="260" Margin="528,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="460" Name="tbx_actualWeight" FontSize="48" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox HorizontalAlignment="Left" Height="125" Margin="528,280,0,0" VerticalContentAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="460" Name="tbx_lastScale" FontSize="25" FontWeight="Bold" IsEnabled="False"/>
+        <Button x:Name="btn_scale" Content="Wiegen"  IsEnabled="False" HorizontalAlignment="Left" Margin="30,420,0,0" VerticalAlignment="Top" Width="460" Height="90" Background="#FFB0D99D" FontSize="25" FontWeight="Bold" Click="btn_scale_Click"/>
+        <Button x:Name="btn_cancel" Content="Box schließen" HorizontalAlignment="Left" Margin="30,520,0,0" VerticalAlignment="Top" Width="460" Height="90" Background="#FFEC4E4E" FontSize="25" FontWeight="Bold" Click="Btn_cancel_Click"/>
+        <Button x:Name="btn_deleteLastScale" Background="#FFEC4E4E" IsEnabled="False" Content="Letzte Wiegung löschen" HorizontalAlignment="Left" Margin="528,420,0,0" VerticalAlignment="Top" Width="460" Height="90" FontWeight="Bold" FontSize="25" Click="Btn_deleteLastScale_Click"/>
+        <Label Name="lbl_lastWeightGuid" Visibility="Hidden" Content="GUID letzte Wiegung" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Width="460"/>
+        <Button x:Name="btn_manualEntry" Content="Manuelle Gewichtseingabe" HorizontalAlignment="Left" Margin="528,520,0,0" VerticalAlignment="Top" Width="460" Height="90" Background="AliceBlue" FontSize="25" FontWeight="Bold" Click="Btn_manualEntry_Click" />
     </Grid>
 </Page>

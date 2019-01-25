@@ -11,18 +11,20 @@
 
 
     <Grid Background="#FFEEEEEE">
+        <Image Source="favicon.ico" HorizontalAlignment="Left" Height="180" VerticalAlignment="Top" Width="148" Margin="436,290,0,0"/>
         <StackPanel >
             <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Margin="0,250,0,0" FontSize="18" FontWeight="Bold" >
                 Bitte halten Sie ihren Mitarbeiter-Coin an den RFID-Leser des Terminal!
             </TextBlock>
-            <Button x:Name="btn_loginSimulation" Content="Login simulieren" Width="300" Height="100" Margin="0,50,0,0" Click="btn_loginSimulation_Click"/>
-            <TextBox Name="tbx_rfidNr" Height="23" TextWrapping="Wrap" Text="" Width="120" Margin="20"/>
-            <Button Name="btn_settings" Width="100" Height="100" Background="{x:Null}" Margin="900,50,0,0" BorderThickness="0" Click="btn_settings_Click">
+            <Button x:Name="btn_loginSimulation" Content="Login simulieren" Width="300" Height="100" Margin="0,50,0,0" Click="btn_loginSimulation_Click" IsEnabled="True" Visibility="Hidden"/>
+            <TextBox Name="tbx_rfidNr" Height="23" TextWrapping="Wrap" Text="" Width="120" Margin="20" KeyDown="Tbx_rfidNr_KeyDown" Visibility="Visible" Opacity="0"/>
+            <Button Content="Manuell anmelden" Name="btn_manualLogin" Width="300" Height="50" Click="Btn_manualLogin_Click" />
+            <TextBox Name="tbx_rfidManuell" Height="23" TextWrapping="Wrap" Text="" Width="120" Margin="20" Visibility="Hidden" IsEnabled="False"/>
+            <Button Name="btn_settings" Width="100" Height="100" Background="{x:Null}" Margin="900,-70,0,0" BorderThickness="0" Click="btn_settings_Click">
                 <Image Source="rüstung.ico">
 
                 </Image>
             </Button>
-
         </StackPanel>
     </Grid>
 </Page>

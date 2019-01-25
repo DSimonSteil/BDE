@@ -29,12 +29,8 @@ namespace BDE_MDE
         private string str_xmlDestinationPath;
         private int int_sleepTime = 0;
         private MainWindow mw;
-
-        //private string str_branch;
-        //private string str_from;
-        //private string str_to;
-        //private string str_sign;
-        //private string str_mxsHost;
+        private string str_box = String.Empty;
+        private string str_facility = String.Empty;
         #endregion
 
         #region Constructor
@@ -44,14 +40,23 @@ namespace BDE_MDE
             {
                 InitializeComponent();
 
-                tbx_actualBox.Text = @"Box: " + str_actualBox;
-                tbx_actualFacility.Text = str_actualFacility;                
-                fc = facility;
-                ScaleListener();
+                xml_configFile = new XmlDocument();
+                xml_configFile.Load(str_configFilePath);
 
+                str_box = str_actualBox;
+
+                str_facility = str_actualFacility;
+
+                tbx_actualBox.Text = @"Box: " + str_actualBox;
+                tbx_actualFacility.Text = str_actualFacility;
+                fc = facility;
                 mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 mw.btn_facilities.IsEnabled = false;
+                mw.btn_downtimes.IsEnabled = false;
 
+
+                ScaleListener();
+                                                                           
             }
             catch (Exception exc)
             {
@@ -64,7 +69,9 @@ namespace BDE_MDE
         private void ScaleListener()
         {
             try
-            {
+            {                
+                mw.btn_logout.IsEnabled = false;
+
                 xml_configFile = new XmlDocument();
                 xml_configFile.Load(str_configFilePath);                
                 string str_serialPort = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Serial-Port").Attributes[@"value"].Value;
@@ -111,13 +118,20 @@ namespace BDE_MDE
                     System.Threading.Thread.Sleep(int_sleepTime);
                 }
 
+                if (xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Serial-Port-Logger").Attributes[@"value"].Value.Equals("true"))
+                {
+                    LOGtoFS.CreateTxtFile(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\PortLogger\" + DateTime.Today.ToShortDateString() + @"_Log.txt");
+                    LOGtoFS.WriteLog(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\PortLogger\" + DateTime.Today.ToShortDateString() + "_Log.txt", DateTime.Now.ToString() + "   -----   " + str_scaleOutput + System.Environment.NewLine);
+                }
+
                 stra_weight = str_scaleOutput.Split(';');
 
                 Dispatcher.Invoke(new Action(delegate ()
                 {
                     try
                     {
-                        tbx_actualWeight.Text = stra_weight[8].Replace("\r\n", String.Empty) + @"kg";//+ System.Convert.ToString(charToRead);
+                        tbx_actualWeight.Text = stra_weight[8].Replace("\r\n", String.Empty) + @"t";//+ System.Convert.ToString(charToRead);
+                        tbx_actualWeight.Background = System.Windows.Media.Brushes.Yellow;
                         btn_scale.IsEnabled = true;
                     }
                     catch (Exception exc)
@@ -139,10 +153,14 @@ namespace BDE_MDE
         private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                sp_scaleListening.Close();
-                mw.btn_facilities.IsEnabled = true;
+            {                
+                sp_scaleListening.Close();                                
+                mw.btn_facilities.IsEnabled = true;                
+                mw.btn_downtimes.IsEnabled = true;
+                mw.btn_logout.IsEnabled = true;
                 NavigationService.Navigate(fc);
+
+                TimeReport.CreateReport(@"B40", str_facility, str_box);
             }
             catch (Exception exc)
             {
@@ -156,6 +174,21 @@ namespace BDE_MDE
             {
                 ScaleProcess sp = new ScaleProcess(this, tbx_actualFacility.Text, tbx_actualBox.Text, tbx_actualWeight.Text);
                 this.NavigationService.Navigate(sp);
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+
+        private void Btn_manualEntry_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {                
+                sp_scaleListening.Close();
+                                
+                ScaleManual sm = new ScaleManual(fc, this, str_box, str_facility);
+                this.NavigationService.Navigate(sm);
             }
             catch (Exception exc)
             {
@@ -190,10 +223,11 @@ namespace BDE_MDE
             {                            
                 str_xmlDestinationPath = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/ScalePath").Attributes[@"value"].Value;
                                 
-                using (XmlWriter writer = XmlWriter.Create(str_xmlDestinationPath + "/ToDelete_" + DateTime.Now.Ticks + ".xml"))
-                {                                        
-                    writer.WriteStartElement("ToDelete");
+                using (XmlWriter writer = XmlWriter.Create(str_xmlDestinationPath + "/ToDelete_" + DateTime.Now.Ticks + @".xml"))
+                {                                                            
+                    writer.WriteStartElement("Scale");                    
                     writer.WriteElementString("GUID", lbl_lastWeightGuid.Content.ToString());
+                    writer.WriteElementString("WDELETE", "X");
                     writer.WriteEndElement();
                     writer.Flush();
                 }
@@ -211,7 +245,7 @@ namespace BDE_MDE
             Feedback fb = new Feedback();
 
             fb.FeedbackHandler(exc);
-        }        
-        #endregion
+        }
+        #endregion        
     }                
 }

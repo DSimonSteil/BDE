@@ -9,15 +9,15 @@
       Title="ScaleProcess">
 
     <Grid Background="#FFD7D7D7">
-        <WrapPanel Name="wp_scaleProcess" HorizontalAlignment="Center" Height="619"  VerticalAlignment="Top" Width="888" Margin="68,0">
-            <TextBox Name="tbx_facility"  Text="Anlage" Margin="5,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+        <WrapPanel Name="wp_scaleProcess" HorizontalAlignment="Center" Height="619"  VerticalAlignment="Top" Width="888" Margin="68,10">
+            <TextBox Name="tbx_facility"  Text="Anlage" Margin="10,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
             <TextBox Name="tbx_date"  Text="Datum" Margin="50,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
-            <TextBox Name="tbx_boxID"  Text="Box" Margin="5,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_boxID"  Text="Box" Margin="10,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
             <TextBox Name="tbx_time"  Text="Uhrzeit" Margin="50,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
-            <TextBox Name="tbx_weight"  Text="Gewicht" Margin="5,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
+            <TextBox Name="tbx_weight"  Text="Gewicht" Margin="10,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
             <TextBox Name="tbx_employee"  Text="Mitarbeiter" Margin="50,10,0,0" VerticalContentAlignment="Center" TextAlignment="Center" FontSize="36" FontWeight="Bold" Height="100" Width="400" TextWrapping="Wrap" IsEnabled="False"/>
-            <Button x:Name="btn_confirm" Content="Bestätigen" HorizontalAlignment="Left" Margin="5,100,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontSize="25" FontWeight="Bold" Click="Btn_confirm_Click"/>
-            <Button x:Name="btn_cancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFEC4E4E" FontSize="25" FontWeight="Bold" Click="Btn_cancel_Click"/>
+            <Button x:Name="btn_confirm" Content="Bestätigen" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFB0D99D" FontSize="25" FontWeight="Bold" Click="Btn_confirm_Click"/>
+            <Button x:Name="btn_cancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="50,170,0,0" VerticalAlignment="Top" Width="400" Height="100" Background="#FFEC4E4E" FontSize="25" FontWeight="Bold" Click="Btn_cancel_Click"/>
         </WrapPanel>
 
 

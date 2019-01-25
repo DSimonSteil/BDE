@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BDE_MDE"
         mc:Ignorable="d"
-        Title="BDE/MDE" ResizeMode="CanResize" Height="768" Width="1024" Icon="logo_small.ico">
+        Title="BDE/MDE" Height="768" Width="1024" Icon="logo_small.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="653*"/>
@@ -13,16 +13,17 @@
             <ColumnDefinition Width="269*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="#FFD5E8D4" Grid.ColumnSpan="3" Margin="0,0,10,0" >
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Background="#FFD5E8D4" Grid.ColumnSpan="3" Margin="0,0,0,0" >
             <TextBox Name="tbx_actualTime" Text="Zeit:" Width="120" FontSize="16" TextWrapping="Wrap" IsEnabled="False" FontWeight="Bold"/>
             <TextBox Name="tbx_actualUser" Text="Fahrer:" Width="120" FontSize="16" TextWrapping="Wrap" IsEnabled="False" FontWeight="Bold"/>
             <TextBox Name="tbx_facility"  x:FieldModifier="public" Text="Aktuelle Anlage:" Width="150" FontSize="16" TextWrapping="Wrap" IsEnabled="False" FontWeight="Bold"/>
 
-            <Button x:Name="btn_facilities" IsEnabled="False" Content="Anlage wechseln" HorizontalAlignment="Left" Margin="150,0,0,0" VerticalAlignment="Top" Width="200" Height="80" Click="btn_facilty_Click" Background="#FFB0D99D" FontSize="16" FontWeight="Bold"/>
-            <Button x:Name="btn_logout" Content="Logout" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="200" Height="80" Click="btn_logout_Click" Background="#FFB0D99D" FontSize="16" FontWeight="Bold"/>
+            <Button x:Name="btn_facilities" IsEnabled="False" Content="Anlage wechseln" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="150" Height="80" Click="btn_facilty_Click" Background="#FFB0D99D" FontSize="16" FontWeight="Bold"/>
+            <Button x:Name="btn_downtimes" Visibility="Visible" IsEnabled="False" Content="Tätigkeit wechseln" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="150" Height="80" Background="#FFB0D99D" FontSize="16" FontWeight="Bold" Click="Btn_downtimes_Click"/>
+            <Button x:Name="btn_logout" Content="Logout" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="150" Height="80" Click="btn_logout_Click" Background="#FFB0D99D" FontSize="16" FontWeight="Bold"/>
 
         </StackPanel>
         <Label Name="lbl_employeeID" Visibility="Hidden" />
-        <Frame x:Name="MainFrame" Margin="0,90,0,0" FontSize="20" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="MainFrame" Margin="0,80,0,0" FontSize="20" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

@@ -23,6 +23,8 @@ namespace BDE_MDE
         #region Variables
         private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
         private string str_branch = String.Empty;
+        private XmlDocument xml_configFile;
+        private MainWindow mw;
         #endregion
 
         #region Constructor
@@ -30,6 +32,10 @@ namespace BDE_MDE
         {
             InitializeComponent();
             CreateFacilityButtons();
+            mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.btn_facilities.IsEnabled = false;
+            mw.btn_downtimes.IsEnabled = true;
+            mw.btn_logout.IsEnabled = true;
         }
         #endregion
 
@@ -39,15 +45,30 @@ namespace BDE_MDE
             ViewArea va = new ViewArea();
             this.NavigationService.Navigate(va);
         }
-
         private void btn_button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 Button btn = sender as Button;
-
+                mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw.btn_facilities.IsEnabled = true;
+                mw.btn_downtimes.IsEnabled = true;
                 Facilities fac = new Facilities(btn.Content.ToString());
-                this.NavigationService.Navigate(fac);
+                this.NavigationService.Navigate(fac);                
+            }
+            catch (Exception exc)
+            {
+                Feedback(exc);
+            }
+        }
+        private void Btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {                
+                mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                mw.btn_facilities.IsEnabled = true;
+                mw.btn_downtimes.IsEnabled = true;
+                NavigationService.GoBack();                
             }
             catch (Exception exc)
             {
@@ -61,7 +82,7 @@ namespace BDE_MDE
         {            
             try
             {
-                XmlDocument xml_configFile = new XmlDocument();
+                xml_configFile = new XmlDocument();
                 xml_configFile.Load(str_configFilePath);
                 str_branch = xml_configFile.SelectSingleNode(@"BDE.Configuration/General/Branch").Attributes[@"value"].Value;
 
@@ -113,18 +134,6 @@ namespace BDE_MDE
 
             fb.FeedbackHandler(exc);            
         }
-        #endregion
-
-        private void Btn_cancel_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                NavigationService.GoBack();
-            }
-            catch (Exception exc)
-            {
-                Feedback(exc);
-            }
-        }
+        #endregion        
     }
 }

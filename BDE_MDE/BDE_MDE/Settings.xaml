@@ -9,27 +9,28 @@
       Title="Settings">
 
     <Grid Background="#FFEEEEEE">
-        <Button Name="btn_confirm" Content="Ok" HorizontalAlignment="Left" Margin="106,97,0,0" VerticalAlignment="Top" Width="120" Height="44" Click="Btn_confirm_Click"/>
+        <Button Name="btn_confirm" Content="Login" HorizontalAlignment="Left" Margin="106,97,0,0" VerticalAlignment="Top" Width="120" Height="44" Click="Btn_confirm_Click"/>
         <Label Content="Passwort:" HorizontalAlignment="Left" Margin="32,42,0,0" VerticalAlignment="Top"/>
-        <PasswordBox Name="pwb_password" HorizontalAlignment="Left" Margin="106,50,0,0" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox Name="pwb_password" HorizontalAlignment="Left" Margin="106,50,0,0" VerticalAlignment="Top" Width="254"/>
         <Label Content="Niederlassung:" HorizontalAlignment="Left" Margin="32,195,0,0" VerticalAlignment="Top"/>
-        <Label Content="Radladerbezeichnung:" HorizontalAlignment="Left" Margin="32,274,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="tbx_loader" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="181,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"/>
-        <ComboBox Name="cbx_branch" IsEnabled="False" HorizontalAlignment="Left" Margin="181,199,0,0" VerticalAlignment="Top" Width="179">
-            <ComboBoxItem Content="Anklam" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Berlin" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Dordrecht (NL)" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Eberswalde" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Eisenhüttenstadt" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Hanau" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Köln-Deutz" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Ludwigshafen" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Saarlouis" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Wasserbillig (LU)" HorizontalAlignment="Left" Width="177"/>
-            <ComboBoxItem Content="Trier" HorizontalAlignment="Left" Width="177"/>
-        </ComboBox>
-        <Button x:Name="btn_transfer" IsEnabled="False" Content="Übernehmen" HorizontalAlignment="Left" Margin="39,343,0,0" VerticalAlignment="Top" Width="120" Height="44" Click="Btn_transfer_Click"/>
-        <Button x:Name="btn_cancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="240,97,0,0" VerticalAlignment="Top" Width="120" Height="44" Click="Btn_cancel_Click"/>
+        <Label Content="Radladerbezeichnung:" HorizontalAlignment="Left" Margin="32,254,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="cbx_vehicle" IsEnabled="False" HorizontalAlignment="Left" Margin="181,258,0,0" VerticalAlignment="Top" Width="179" />
+        <ComboBox Name="cbx_branch" IsEnabled="False" HorizontalAlignment="Left" Margin="181,199,0,0" VerticalAlignment="Top" Width="179" SelectionChanged="Cbx_branch_SelectionChanged" />
+        <Button x:Name="btn_transfer" IsEnabled="False" Content="Einstellungen Übernehmen" HorizontalAlignment="Left" Margin="39,316,0,0" VerticalAlignment="Top" Width="321" Height="44" Click="Btn_transfer_Click"/>
+        <Button x:Name="btn_cancel" Content="Abbrechen" HorizontalAlignment="Left" Margin="240,443,0,0" VerticalAlignment="Top" Width="120" Height="44" Click="Btn_cancel_Click"/>
+        <Button Content="Exit" IsEnabled="False" Name="btn_exit" HorizontalAlignment="Left" Margin="39,441,0,0" VerticalAlignment="Top" Width="120" Height="44" Click="Btn_exit_Click"/>
+        <Button x:Name="btn_0" Content="0" HorizontalAlignment="Left" Margin="627,470,0,0" VerticalAlignment="Top" Width="310" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_1" Content="1" HorizontalAlignment="Left" Margin="627,365,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_2" Content="2" HorizontalAlignment="Left" Margin="732,365,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_3" Content="3" HorizontalAlignment="Left" Margin="837,365,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_4" Content="4" HorizontalAlignment="Left" Margin="627,260,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_5" Content="5" HorizontalAlignment="Left" Margin="732,260,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_6" Content="6" HorizontalAlignment="Left" Margin="837,260,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_7" Content="7" HorizontalAlignment="Left" Margin="627,155,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_8" Content="8" HorizontalAlignment="Left" Margin="732,155,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_9" Content="9" HorizontalAlignment="Left" Margin="837,155,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button x:Name="btn_c" Content="C" HorizontalAlignment="Left" Margin="837,50,0,0" VerticalAlignment="Top" Width="100" Height="100" FontSize="25" Click="Btn_Click"/>
+        <Button Name ="btn_teamviewer" Content="Fernwartung starten" HorizontalAlignment="Left" Margin="39,564,0,0" VerticalAlignment="Top" Width="120" Height="44" Click="Btn_teamviewer_Click"/>
 
     </Grid>
 </Page>
