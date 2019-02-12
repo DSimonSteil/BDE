@@ -52,7 +52,7 @@ namespace BDE_MDE
                 fc = facility;
                 mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 mw.btn_facilities.IsEnabled = false;
-                mw.btn_downtimes.IsEnabled = false;
+                //mw.btn_downtimes.IsEnabled = false;
 
 
                 ScaleListener();
@@ -156,11 +156,11 @@ namespace BDE_MDE
             {                
                 sp_scaleListening.Close();                                
                 mw.btn_facilities.IsEnabled = true;                
-                mw.btn_downtimes.IsEnabled = true;
+                //mw.btn_downtimes.IsEnabled = true;
                 mw.btn_logout.IsEnabled = true;
                 NavigationService.Navigate(fc);
 
-                TimeReport.CreateReport(@"B40", str_facility, str_box);
+                //TimeReport.CreateReport(@"B40", str_facility, str_box);
             }
             catch (Exception exc)
             {

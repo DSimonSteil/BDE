@@ -110,7 +110,7 @@ namespace BDE_MDE
                             str_actualUser = x["VORNA"].InnerText + " " + x["NACHN"].InnerText;
                             ConfigClass.strEmpName = x["VORNA"].InnerText + " " + x["NACHN"].InnerText;
                             ConfigClass.strEmpNo = x["PERNR"].InnerText;
-                            TimeReport.CreateReport("P10", "", "");
+                            //TimeReport.CreateReport("P10", "", "");
                             return true;
                         }
                     }

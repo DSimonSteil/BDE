@@ -95,7 +95,7 @@ namespace BDE_MDE
                 }
 
                 rfc_read_table.Invoke(dest);
-
+                
                 var irfc_returnState = rfc_read_table.GetValue("EF_STATE");
 
                 if (irfc_returnState.Equals("X"))

@@ -185,7 +185,7 @@ namespace BDE_MDE
         {
             try
             {                                
-                ScaleProcess sp = new ScaleProcess(this, sc, tbx_actualFacility.Text, tbx_actualBox.Text, tbx_actualWeight.Text + @" to");
+                ScaleProcess sp = new ScaleProcess(this, sc, tbx_actualFacility.Text, tbx_actualBox.Text, tbx_actualWeight.Text + @" TO");
                 this.NavigationService.Navigate(sp);                                                            
             }
             catch (Exception exc)

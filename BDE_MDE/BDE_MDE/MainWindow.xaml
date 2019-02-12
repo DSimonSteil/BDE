@@ -19,7 +19,7 @@
             <TextBox Name="tbx_facility"  x:FieldModifier="public" Text="Aktuelle Anlage:" Width="150" FontSize="16" TextWrapping="Wrap" IsEnabled="False" FontWeight="Bold"/>
 
             <Button x:Name="btn_facilities" IsEnabled="False" Content="Anlage wechseln" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="150" Height="80" Click="btn_facilty_Click" Background="#FFB0D99D" FontSize="16" FontWeight="Bold"/>
-            <Button x:Name="btn_downtimes" Visibility="Visible" IsEnabled="False" Content="Tätigkeit wechseln" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="150" Height="80" Background="#FFB0D99D" FontSize="16" FontWeight="Bold" Click="Btn_downtimes_Click"/>
+            <Button x:Name="btn_downtimes" Visibility="Hidden" IsEnabled="False" Content="Tätigkeit wechseln" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="150" Height="80" Background="#FFB0D99D" FontSize="16" FontWeight="Bold" Click="Btn_downtimes_Click"/>
             <Button x:Name="btn_logout" Content="Logout" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" Width="150" Height="80" Click="btn_logout_Click" Background="#FFB0D99D" FontSize="16" FontWeight="Bold"/>
 
         </StackPanel>

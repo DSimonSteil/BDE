@@ -111,7 +111,7 @@ namespace BDE_MDE
                             Margin = new Thickness(30, 5, 0, 0),                            
                             FontWeight = FontWeights.Bold,
                             FontSize = 16,
-                            Width = 400,
+                            Width = 260,
                             Height = 100,                            
                         };
                         wp_buttons.Children.Add(btn);

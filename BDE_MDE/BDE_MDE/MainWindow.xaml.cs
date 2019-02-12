@@ -62,18 +62,23 @@ namespace BDE_MDE
 
             DeleteLOGs(Convert.ToInt32(xml_configFile.SelectSingleNode(@"BDE.Configuration/General/LogHoldBackDays").Attributes[@"value"].Value));            
 
-            if (CheckConnection.PingSAP(xml_configFile.SelectSingleNode(@"BDE.Configuration/General/SAP_IP").Attributes[@"value"].Value, "GetSapData"))
+            //if (CheckConnection.PingSAP(xml_configFile.SelectSingleNode(@"BDE.Configuration/General/SAP_IP").Attributes[@"value"].Value, "GetSapData"))
             {
                 string xml_file = System.IO.Path.GetDirectoryName(xml_configFile.SelectSingleNode(@"BDE.Configuration/General/SapTablesPath").Attributes[@"value"].Value);
                 xml_file += @"\\ET_EMPLOYEES.xml";
 
-                FileInfo fi_xmlFile = new FileInfo(xml_file);
-                if (fi_xmlFile.LastWriteTime < DateTime.Now.Date)
+                if (File.Exists(xml_file))
+                {
+                    FileInfo fi_xmlFile = new FileInfo(xml_file);
+                    if (fi_xmlFile.LastWriteTime < DateTime.Now.Date)
+                    {
+                        GetSapData();
+                    }                    
+                }
+                else
                 {
                     GetSapData();
                 }
-                GetSapData();
-                
             }
 
             MainFrame.Content = new Login();
@@ -118,10 +123,10 @@ namespace BDE_MDE
                 string[] stra_preFacility = tbx_facility.Text.Split(':');
                 if (!String.IsNullOrEmpty(stra_preFacility[1].Trim()))
                 {
-                    TimeReport.CreateReport(@"P20", stra_preFacility[1].Trim(), "");
+                    //TimeReport.CreateReport(@"P20", stra_preFacility[1].Trim(), "");
                 }
 
-                TimeReport.LogOff(xml_configFile);
+                //TimeReport.LogOff(xml_configFile);
                 btn_facilities.IsEnabled = false;
                 tbx_actualUser.Text = "Fahrer: ";
                 tbx_facility.Text = "Aktuelle Anlage: ";

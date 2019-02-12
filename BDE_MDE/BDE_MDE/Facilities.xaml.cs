@@ -57,7 +57,7 @@ namespace BDE_MDE
                     this.NavigationService.Navigate(sca);
                 }
                 
-                TimeReport.CreateReport(@"B10", str_actualFac, btn.Content.ToString());
+                //TimeReport.CreateReport(@"B10", str_actualFac, btn.Content.ToString());
             }
             catch (Exception exc)
             {
@@ -81,12 +81,12 @@ namespace BDE_MDE
                     string[] stra_preFacility = mw.tbx_facility.Text.Split(':');
                     if (!String.IsNullOrEmpty(stra_preFacility[1].Trim()))
                     {
-                        TimeReport.CreateReport(@"P20", stra_preFacility[1].Trim(), "");
-                        TimeReport.CreateReport(@"P10", str_actualFacility, "");
+                        //TimeReport.CreateReport(@"P20", stra_preFacility[1].Trim(), "");
+                        //TimeReport.CreateReport(@"P10", str_actualFacility, "");
                     }
                     else
                     {
-                        TimeReport.CreateReport(@"P10", str_actualFacility, "");
+                        //TimeReport.CreateReport(@"P10", str_actualFacility, "");
                     }
                 }
                 else

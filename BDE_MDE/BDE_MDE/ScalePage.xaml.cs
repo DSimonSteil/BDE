@@ -131,7 +131,7 @@ namespace BDE_MDE
         {
             try
             {
-                ScaleProcess sp = new ScaleProcess(this, tbx_actualFacility.Text, tbx_actualBox.Text, tbx_actualWeight.Text + @" to");
+                ScaleProcess sp = new ScaleProcess(this, tbx_actualFacility.Text, tbx_actualBox.Text, tbx_actualWeight.Text + @" TO");
                 this.NavigationService.Navigate(sp);
             }
             catch (Exception exc)
@@ -144,7 +144,7 @@ namespace BDE_MDE
         {
             try
             {
-                TimeReport.CreateReport(@"B40", tbx_actualFacility.Text, tbx_actualBox.Text.Split(':')[1].Trim());
+                //TimeReport.CreateReport(@"B40", tbx_actualFacility.Text, tbx_actualBox.Text.Split(':')[1].Trim());
 
                 mw.btn_facilities.IsEnabled = true;
                 this.NavigationService.Navigate(fac);

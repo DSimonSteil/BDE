@@ -197,7 +197,7 @@ namespace BDE_MDE
 
                 if (CheckConnection.PingSAP(str_sapIP, @"CreateScaleXML"))
                 {                                                            
-                    dest = RfcDestinationManager.GetDestination(xml_configFile.SelectSingleNode(@"BDE.Configuration/General/SAP_Connection").Attributes[@"value"].Value);
+                    dest = RfcDestinationManager.GetDestination(xml_configFile.SelectSingleNode(@"BDE.Configuration/General/SAP_Connection").Attributes[@"value"].Value);                    
                     rep = dest.Repository;
 
                     var rfc_read_table = rep.CreateFunction("Z_PP_BDE_IMPORT");
@@ -205,7 +205,8 @@ namespace BDE_MDE
                     IRfcStructure struct_bde_weight = rfc_read_table.GetStructure("IS_BDE_WEIGHT");
 
                     struct_bde_weight.SetValue("WERKS", str_branchNo);
-                    struct_bde_weight.SetValue("ANLAGE", tbx_facility.Text);
+                    //struct_bde_weight.SetValue("ANLAGE", tbx_facility.Text);
+                    struct_bde_weight.SetValue("ANLAGE", xml_configFile.SelectSingleNode(@"BDE.Configuration/" + str_branch + "/Aerial_image/" + tbx_facility.Text + "/EQ").Attributes[@"value"].Value);
                     struct_bde_weight.SetValue("VEHICLE", str_vehicle_EQ);
                     struct_bde_weight.SetValue("BOX", stra_box[1].Trim());
                     struct_bde_weight.SetValue("GUID", str_weightGuid);
@@ -232,7 +233,8 @@ namespace BDE_MDE
                             writer.WriteElementString("EmployeeNo", ConfigClass.strEmpNo);
                             writer.WriteElementString("WeightDate", DateTime.Now.ToString("yyyyMMdd"));
                             writer.WriteElementString("WeightTime", DateTime.Now.ToString("HHmmss"));
-                            writer.WriteElementString("Facility", tbx_facility.Text);
+                            //writer.WriteElementString("Facility", tbx_facility.Text);
+                            struct_bde_weight.SetValue("Facility", xml_configFile.SelectSingleNode(@"BDE.Configuration/" + str_branch + "/Aerial_image/" + tbx_facility.Text + "/EQ").Attributes[@"value"].Value);
                             writer.WriteElementString("Box", stra_box[1].Trim());
 
                             string[] stra_weightXML = tbx_weight.Text.Split(' ');
@@ -245,6 +247,7 @@ namespace BDE_MDE
                             writer.Flush();
                         }
                     }
+                    rfc_read_table.
                 }
                 else
                 {
@@ -256,7 +259,8 @@ namespace BDE_MDE
                         writer.WriteElementString("EmployeeNo", ConfigClass.strEmpNo);
                         writer.WriteElementString("WeightDate", DateTime.Now.ToString("yyyyMMdd"));
                         writer.WriteElementString("WeightTime", DateTime.Now.ToString("HHmmss"));
-                        writer.WriteElementString("Facility", tbx_facility.Text);
+                        //writer.WriteElementString("Facility", tbx_facility.Text);
+                        writer.WriteElementString("Facility", xml_configFile.SelectSingleNode(@"BDE.Configuration/" + str_branch + "/Aerial_image/" + tbx_facility.Text + "/EQ").Attributes[@"value"].Value);                        
                         writer.WriteElementString("Box", stra_box[1].Trim());
 
                         string[] stra_weightXML = tbx_weight.Text.Split(' ');

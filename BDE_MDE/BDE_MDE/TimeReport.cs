@@ -32,7 +32,8 @@ namespace BDE_MDE
                 xml_doc.Load(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml");
                 str_reportPath = xml_doc.SelectSingleNode(@"BDE.Configuration/General/TimeReportPath").Attributes[@"value"].Value;
                 str_reportFileName = str_reportPath + ConfigClass.strEmpNo + @"_" + DateTime.Now.ToString("yyyyMMdd") + "_" + DateTime.Now.ToString("HHmmss") + @".xml";
-                
+                string str_branch = xml_doc.SelectSingleNode(@"BDE.Configuration/General/Branch").Attributes[@"value"].Value;
+
                 if (CheckConnection.PingSAP(xml_doc.SelectSingleNode(@"BDE.Configuration/General/SAP_IP").Attributes[@"value"].Value, @"CreateReport"))
                 {
                     dest = RfcDestinationManager.GetDestination(xml_doc.SelectSingleNode(@"BDE.Configuration/General/SAP_Connection").Attributes[@"value"].Value);
@@ -45,6 +46,7 @@ namespace BDE_MDE
                     struct_bde_time.SetValue("WERKS", xml_doc.SelectSingleNode(@"BDE.Configuration/General/Branch_NL").Attributes[@"value"].Value);
                     struct_bde_time.SetValue("PERNR", ConfigClass.strEmpNo);
                     struct_bde_time.SetValue("VEHICLE", xml_doc.SelectSingleNode(@"BDE.Configuration/General/Vehicle_EQ").Attributes[@"value"].Value);
+                    
                     struct_bde_time.SetValue("ANLAGE", str_actFacility);
                     struct_bde_time.SetValue("BOX", str_actBox);
                     struct_bde_time.SetValue("UZEIT", DateTime.Now.ToString("HHmmss"));
@@ -120,7 +122,7 @@ namespace BDE_MDE
         {
             try
             {
-                TimeReport.CreateReport("P20", "", "");                
+                //TimeReport.CreateReport("P20", "", "");                
             }
             catch (Exception exc)
             {
