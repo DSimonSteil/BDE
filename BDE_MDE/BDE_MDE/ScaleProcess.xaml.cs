@@ -246,8 +246,7 @@ namespace BDE_MDE
                             writer.WriteEndElement();
                             writer.Flush();
                         }
-                    }
-                    rfc_read_table.
+                    }                    
                 }
                 else
                 {

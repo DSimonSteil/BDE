@@ -28,7 +28,7 @@ namespace BDE_MDE
         private char lc;
         private string str_weight = String.Empty;
         private MainWindow mw;
-        private Facilities fac;
+        private Facilities fac;        
         #endregion
 
         #region Constructor
@@ -197,6 +197,11 @@ namespace BDE_MDE
         {
             try
             {                
+                if (sc.sp_scaleListening.IsOpen)
+                {
+                    sc.sp_scaleListening.Close();
+                }
+
                 mw.btn_facilities.IsEnabled = true;
                 mw.btn_logout.IsEnabled = true;
                 this.NavigationService.Navigate(fac);

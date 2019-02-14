@@ -23,7 +23,8 @@ namespace BDE_MDE
     {
         #region Variables        
         private Facilities fc;
-        private SerialPort sp_scaleListening;
+        public SerialPort sp_scaleListening;
+        public SerialPort sp;
         private string str_configFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\bdeConfig.xml";
         private XmlDocument xml_configFile;
         private string str_xmlDestinationPath;
@@ -31,6 +32,14 @@ namespace BDE_MDE
         private MainWindow mw;
         private string str_box = String.Empty;
         private string str_facility = String.Empty;
+
+        private string str_scaleOutput = String.Empty;
+
+        //string[] stra_weight;
+        private string str_weight = String.Empty;
+        private string str_dummy = String.Empty;
+        private string str_firstChar = String.Empty;
+        private DateTime dt_weightStart = DateTime.Now;
         #endregion
 
         #region Constructor
@@ -53,10 +62,7 @@ namespace BDE_MDE
                 mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
                 mw.btn_facilities.IsEnabled = false;
                 //mw.btn_downtimes.IsEnabled = false;
-
-
-                ScaleListener();
-                                                                           
+                ScaleListener();                                                                           
             }
             catch (Exception exc)
             {
@@ -88,7 +94,12 @@ namespace BDE_MDE
                 sp_scaleListening.DataBits = Convert.ToInt32(str_dataBits);
                 sp_scaleListening.Handshake = Handshake.None;
 
-                sp_scaleListening.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);                
+                sp_scaleListening.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+                
+                if (sp_scaleListening.IsOpen)
+                {
+                    sp_scaleListening.Close();
+                }
                 sp_scaleListening.Open();
             }
             catch (Exception exc)
@@ -103,14 +114,16 @@ namespace BDE_MDE
             {
                 string str_scaleOutput = String.Empty;
 
-                string[] stra_weight;
+                //string[] stra_weight;
+                string str_weight = String.Empty;
+                string str_dummy = String.Empty;
 
-                SerialPort sp = sender as SerialPort;
+                sp = sender as SerialPort;
 
-                Dispatcher.Invoke(new Action(delegate ()
-                {
-                    tbx_actualWeight.Text = String.Empty;                    
-                }));                                
+                //Dispatcher.Invoke(new Action(delegate ()
+                //{
+                //    tbx_actualWeight.Text = String.Empty;                    
+                //}));                                
 
                 while (sp.BytesToRead > 0)
                 {
@@ -124,15 +137,56 @@ namespace BDE_MDE
                     LOGtoFS.WriteLog(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\PortLogger\" + DateTime.Today.ToShortDateString() + "_Log.txt", DateTime.Now.ToString() + "   -----   " + str_scaleOutput + System.Environment.NewLine);
                 }
 
-                stra_weight = str_scaleOutput.Split(';');
+                //stra_weight = str_scaleOutput.Split(';');
+
+                if (!String.IsNullOrEmpty(str_scaleOutput))
+                {
+                    str_firstChar = str_scaleOutput[1].ToString();
+
+                    str_dummy = str_scaleOutput.Substring(2);
+
+                    if (str_dummy[2].Equals(','))
+                    {
+                        str_weight = str_dummy.Substring(1, 4);
+                    }
+                    else if (str_dummy[3].Equals(','))
+                    {
+                        str_weight = str_dummy.Substring(1, 5);
+                    }
+                    else
+                    {
+                        str_weight = "Fehler. Bitte manuelle Gewichtseingabe.";
+                    }
+                }
+                
 
                 Dispatcher.Invoke(new Action(delegate ()
                 {
                     try
                     {
-                        tbx_actualWeight.Text = stra_weight[8].Replace("\r\n", String.Empty) + @"t";//+ System.Convert.ToString(charToRead);
-                        tbx_actualWeight.Background = System.Windows.Media.Brushes.Yellow;
-                        btn_scale.IsEnabled = true;
+                        //tbx_actualWeight.Text = stra_weight[8].Replace("\r\n", String.Empty) + @" TO";//+ System.Convert.ToString(charToRead);
+
+                        if (!String.IsNullOrEmpty(str_weight))
+                        {
+                            if (str_weight.StartsWith("Fehler"))
+                            {
+                                tbx_actualWeight.Text = str_weight;
+                            }
+                            else
+                            {
+                                tbx_actualWeight.Text = str_weight + @" TO";
+                            }                            
+                        }
+
+                        if (!tbx_actualWeight.Text.Equals("0,00 TO"))
+                        {
+                            btn_scale.IsEnabled = true;
+                        }
+                        else
+                        {
+                            btn_scale.IsEnabled = false;
+                        }
+
                     }
                     catch (Exception exc)
                     {
@@ -184,9 +238,7 @@ namespace BDE_MDE
         private void Btn_manualEntry_Click(object sender, RoutedEventArgs e)
         {
             try
-            {                
-                sp_scaleListening.Close();
-                                
+            {                                                                                
                 ScaleManual sm = new ScaleManual(fc, this, str_box, str_facility);
                 this.NavigationService.Navigate(sm);
             }
