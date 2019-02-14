@@ -186,6 +186,8 @@ namespace BDE_MDE
                 cbx_vehicle.SelectedValuePath = "Key";
                 cbx_vehicle.DisplayMemberPath = "Value";
 
+                cbx_vehicle.Items.Clear();
+
                 foreach (XmlNode xn1 in xnList)
                 {
                     foreach (XmlNode xn2 in xn1.ChildNodes)
